@@ -205,3 +205,24 @@ cython_debug/
 marimo/_static/
 marimo/_lsp/
 __marimo__/
+
+# ASTRA-Q Specific Output Folders
+static_pipeline/output/
+
+# Crawl & parse logs
+*.log
+static_pipeline/**/*.log
+
+# Crawler generated backups or temp files
+*.tmp
+*.bak
+*.old
+
+# Debug/test artifacts
+test_*.py
+*.test.json
+
+# Local configs or API keys (if any)
+config.yaml
+*.env
+.env.*
