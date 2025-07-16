@@ -1,0 +1,12 @@
+{
+  "title": "string",
+  "url": "string",
+  "headings": ["string"],
+  "paragraphs": ["string"],
+  "pdf_links": ["string"],
+  "metadata": {
+    "satellite": "string",
+    "parameter": "string",
+    "region": "string"
+  }
+}
