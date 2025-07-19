@@ -1,0 +1,463 @@
+{
+  "url": "https://mosdac.gov.in/terms-conditions#top",
+  "content": {
+    "text": "Skip to main Content\n\n-A\nA\n+A\nA\nA\nहिन्दी\nEnglish\nSecondary menu\nSignUp Login Logout\nMeteorological & Oceanographic Satellite Data Archival Centre\nSpace Applications Centre, ISRO\nHome\nMissions\n»\nINSAT-3DR\nINSAT-3D\nKALPANA-1\nINSAT-3A\nMeghaTropiques\nSARAL-AltiKa\nOCEANSAT-2\nOCEANSAT-3\nINSAT-3DS\nSCATSAT-1\nCatalog\n»\nSatellite\nInsitu (AWS)\nRADAR\nGalleries\n»\nSatellite Products\nWeather Forecast\nOcean Forecast\nRADAR (DWR)\nGlobal Ocean Current\nData Access\n»\nOrder Data\nOpen Data\n»\nAtmosphere\n»\nBayesian based MT-SAPHIR rainfall\nGPS derived Integrated water vapour\nGSMap ISRO Rain\nMETEOSAT8 Cloud Properties\nLand\n»\n3D Volumetric TERLS DWRproduct\nInland Water Height\nRiver Discharge\nSoil Moisture\nOcean\n»\nGlobal Ocean Surface Current\nHigh Resolution Sea Surface Salinity\nIndian Mainland Coastal Product\nOcean Subsurface\nOceanic Eddies Detection\nSea Ice Occurrence Probability\nWave based Renewable Energy\nCal-Val\nForecast\nRSS Feeds\nReports\n»\nCalibration\n»\nInsitu\nRelative\nValidation\nData Quality\nWeather\nAtlases\nTools\nSitemap\nHelp\nYou are here\nHome » Terms & Conditions\nTerms & Conditions\n\nThis website is designed, developed and maintained by Space Applications Centre, Indian Space Research Organisation, Department of Space, Government of India.\n\nThough all efforts have been made to ensure the accuracy and currency of the content of this website, the same should not be construed as a statement of law or used for any legal purposes.\n\nUnder no circumstances the MOSDAC will be liable for any expense, loss or damage including, without limitation, indirect or consequential loss or damage, or any expense, loss or damage whatsoever arising from use, or loss or use, of data, arising out of or in connection with use of this website.\n\nThe terms and conditions shall be governed by and construed in accordance with the Indian Laws. Any dispute arising under these terms and conditions shall be subject to the exclusive jurisdiction of the courts of India.\n\nThis Website provides links to other web pages that are not part of MOSDAC domain, and MOSDAC does not exercise any control over the information on these external links. External links are provided for your convenience and for reasons consistent with objectives of MOSDAC. Once you link to another site, you are subjected to the Terms & Conditions and privacy policy of that new site. MOSDAC does not guarantee the availability of such linked pages at all times. MOSDAC cannot authorize the use of copyright materials contained in the linked websites. Users are advised to request such authorization from the owner of the linked website. MOSDAC does not guarantee that linked websites comply with Indian Government Web Guidelines.\n\n हिन्दी\nSEARCH\nSearch\nFOLLOW US\n\nWebsite owned and maintained by MOSDAC, Space Applications Centre, Indian Space Research Organisation, Govt. of INDIA.\n\nFeedback\nAbout Us\nContact Us\nCopyright Policy\nData Access Policy\nHyperlink Policy\nPrivacy Policy\nWebsite Policies\nTerms & Conditions\nFAQs\n \n \n \n \n \n\n\"Ver 3.0; Last reviewed and updated on 19 Jul, 2025& Served By: Web-Srv-Pri",
+    "tables": [],
+    "links": [
+      {
+        "href": "#main-content",
+        "text": "Skip to main Content"
+      },
+      {
+        "href": "javascript:;",
+        "text": "-A"
+      },
+      {
+        "href": "javascript:;",
+        "text": "A"
+      },
+      {
+        "href": "javascript:;",
+        "text": "+A"
+      },
+      {
+        "href": "javascript:drupalHighContrast.enableStyles()",
+        "text": "A"
+      },
+      {
+        "href": "javascript:drupalHighContrast.disableStyles()",
+        "text": "A"
+      },
+      {
+        "href": "/internal/registration",
+        "text": "SignUp"
+      },
+      {
+        "href": "/internal/uops",
+        "text": "Login"
+      },
+      {
+        "href": "/internal/logout",
+        "text": "Logout"
+      },
+      {
+        "href": "/",
+        "text": ""
+      },
+      {
+        "href": "/",
+        "text": "Meteorological & Oceanographic Satellite Data Archival Centre"
+      },
+      {
+        "href": "/",
+        "text": "Home"
+      },
+      {
+        "href": "#",
+        "text": "Missions\n»"
+      },
+      {
+        "href": "/insat-3dr",
+        "text": "INSAT-3DR"
+      },
+      {
+        "href": "/insat-3d",
+        "text": "INSAT-3D"
+      },
+      {
+        "href": "/kalpana-1",
+        "text": "KALPANA-1"
+      },
+      {
+        "href": "/insat-3a",
+        "text": "INSAT-3A"
+      },
+      {
+        "href": "/megha-tropiques",
+        "text": "MeghaTropiques"
+      },
+      {
+        "href": "/saral-altika",
+        "text": "SARAL-AltiKa"
+      },
+      {
+        "href": "/oceansat-2",
+        "text": "OCEANSAT-2"
+      },
+      {
+        "href": "/oceansat-3",
+        "text": "OCEANSAT-3"
+      },
+      {
+        "href": "/insat-3ds",
+        "text": "INSAT-3DS"
+      },
+      {
+        "href": "/scatsat-1",
+        "text": "SCATSAT-1"
+      },
+      {
+        "href": "#",
+        "text": "Catalog\n»"
+      },
+      {
+        "href": "/internal/catalog-satellite",
+        "text": "Satellite"
+      },
+      {
+        "href": "/internal/catalog-insitu",
+        "text": "Insitu (AWS)"
+      },
+      {
+        "href": "/internal/catalog-radar",
+        "text": "RADAR"
+      },
+      {
+        "href": "#",
+        "text": "Galleries\n»"
+      },
+      {
+        "href": "/internal/gallery",
+        "text": "Satellite Products"
+      },
+      {
+        "href": "/internal/gallery/weather",
+        "text": "Weather Forecast"
+      },
+      {
+        "href": "/internal/gallery/ocean",
+        "text": "Ocean Forecast"
+      },
+      {
+        "href": "/internal/gallery/dwr",
+        "text": "RADAR (DWR)"
+      },
+      {
+        "href": "/internal/gallery/current",
+        "text": "Global Ocean Current"
+      },
+      {
+        "href": "#",
+        "text": "Data Access\n»"
+      },
+      {
+        "href": "/internal/uops",
+        "text": "Order Data"
+      },
+      {
+        "href": "#",
+        "text": "Open Data\n»"
+      },
+      {
+        "href": "#",
+        "text": "Atmosphere\n»"
+      },
+      {
+        "href": "/bayesian-based-mt-saphir-rainfall",
+        "text": "Bayesian based MT-SAPHIR rainfall"
+      },
+      {
+        "href": "/gps-derived-integrated-water-vapour",
+        "text": "GPS derived Integrated water vapour"
+      },
+      {
+        "href": "/gsmap-isro-rain",
+        "text": "GSMap ISRO Rain"
+      },
+      {
+        "href": "/meteosat8-cloud-properties",
+        "text": "METEOSAT8 Cloud Properties"
+      },
+      {
+        "href": "#",
+        "text": "Land\n»"
+      },
+      {
+        "href": "/3d-volumetric-terls-dwrproduct",
+        "text": "3D Volumetric TERLS DWRproduct"
+      },
+      {
+        "href": "/inland-water-height",
+        "text": "Inland Water Height"
+      },
+      {
+        "href": "/river-discharge",
+        "text": "River Discharge"
+      },
+      {
+        "href": "/soil-moisture-0",
+        "text": "Soil Moisture"
+      },
+      {
+        "href": "#",
+        "text": "Ocean\n»"
+      },
+      {
+        "href": "/global-ocean-surface-current",
+        "text": "Global Ocean Surface Current"
+      },
+      {
+        "href": "/high-resolution-sea-surface-salinity",
+        "text": "High Resolution Sea Surface Salinity"
+      },
+      {
+        "href": "/indian-mainland-coastal-product",
+        "text": "Indian Mainland Coastal Product"
+      },
+      {
+        "href": "/ocean-subsurface",
+        "text": "Ocean Subsurface"
+      },
+      {
+        "href": "/oceanic-eddies-detection",
+        "text": "Oceanic Eddies Detection"
+      },
+      {
+        "href": "/sea-ice-occurrence-probability",
+        "text": "Sea Ice Occurrence Probability"
+      },
+      {
+        "href": "/wave-based-renewable-energy",
+        "text": "Wave based Renewable Energy"
+      },
+      {
+        "href": "/internal/calval-data",
+        "text": "Cal-Val"
+      },
+      {
+        "href": "/internal/forecast-menu",
+        "text": "Forecast"
+      },
+      {
+        "href": "/rss-feed",
+        "text": "RSS Feeds"
+      },
+      {
+        "href": "#",
+        "text": "Reports\n»"
+      },
+      {
+        "href": "#",
+        "text": "Calibration\n»"
+      },
+      {
+        "href": "/insitu",
+        "text": "Insitu"
+      },
+      {
+        "href": "/calibration-reports",
+        "text": "Relative"
+      },
+      {
+        "href": "/validation-reports",
+        "text": "Validation"
+      },
+      {
+        "href": "/data-quality",
+        "text": "Data Quality"
+      },
+      {
+        "href": "/weather-reports",
+        "text": "Weather"
+      },
+      {
+        "href": "/atlases",
+        "text": "Atlases"
+      },
+      {
+        "href": "/tools",
+        "text": "Tools"
+      },
+      {
+        "href": "/sitemap",
+        "text": "Sitemap"
+      },
+      {
+        "href": "/help",
+        "text": "Help"
+      },
+      {
+        "href": "/",
+        "text": "Home"
+      },
+      {
+        "href": "/node/1271?language=hi",
+        "text": "हिन्दी"
+      },
+      {
+        "href": "https://www.facebook.com/mosdac.sac.isro",
+        "text": ""
+      },
+      {
+        "href": "http://www.youtube.com/channel/UCDVkai9WIgY2ZgrlF_08Yeg",
+        "text": ""
+      },
+      {
+        "href": "https://mosdac.gov.in/rss.xml",
+        "text": ""
+      },
+      {
+        "href": "/docs/STQC.pdf",
+        "text": ""
+      },
+      {
+        "href": "/mosdac-feedback",
+        "text": "Feedback"
+      },
+      {
+        "href": "/about-us",
+        "text": "About Us"
+      },
+      {
+        "href": "/contact-us",
+        "text": "Contact Us"
+      },
+      {
+        "href": "/copyright-policy",
+        "text": "Copyright Policy"
+      },
+      {
+        "href": "/data-access-policy",
+        "text": "Data Access Policy"
+      },
+      {
+        "href": "/hyperlink-policy",
+        "text": "Hyperlink Policy"
+      },
+      {
+        "href": "/privacy-policy",
+        "text": "Privacy Policy"
+      },
+      {
+        "href": "/website-policies",
+        "text": "Website Policies"
+      },
+      {
+        "href": "/terms-conditions",
+        "text": "Terms & Conditions"
+      },
+      {
+        "href": "/faq-page",
+        "text": "FAQs"
+      },
+      {
+        "href": "http://www.isro.gov.in",
+        "text": ""
+      },
+      {
+        "href": "http://www.sac.gov.in",
+        "text": ""
+      },
+      {
+        "href": "http://www.india.gov.in",
+        "text": ""
+      },
+      {
+        "href": "http://mygov.in/",
+        "text": ""
+      },
+      {
+        "href": "http://www.digitalindia.gov.in/",
+        "text": ""
+      },
+      {
+        "href": "http://data.gov.in",
+        "text": ""
+      },
+      {
+        "href": "#",
+        "text": ""
+      },
+      {
+        "href": "#",
+        "text": ""
+      },
+      {
+        "href": "#",
+        "text": ""
+      },
+      {
+        "href": "#",
+        "text": ""
+      },
+      {
+        "href": "#",
+        "text": ""
+      },
+      {
+        "href": "#",
+        "text": ""
+      },
+      {
+        "href": "#",
+        "text": ""
+      },
+      {
+        "href": "#",
+        "text": ""
+      },
+      {
+        "href": "#",
+        "text": ""
+      },
+      {
+        "href": "#",
+        "text": ""
+      },
+      {
+        "href": "#top",
+        "text": "Back to top"
+      }
+    ],
+    "images": [
+      {
+        "src": "https://mosdac.gov.in/sites/default/files/mosdac_small.png",
+        "alt": "Home"
+      },
+      {
+        "src": "https://mosdac.gov.in/sites/all/modules/languageicons/flags/hi.png",
+        "alt": "हिन्दी"
+      },
+      {
+        "src": "https://mosdac.gov.in/sites/all/modules/social_media_links/libraries/elegantthemes/PNG/facebook.png",
+        "alt": "Facebook icon"
+      },
+      {
+        "src": "https://mosdac.gov.in/sites/all/modules/social_media_links/libraries/elegantthemes/PNG/youtube.png",
+        "alt": "Youtube (Channel) icon"
+      },
+      {
+        "src": "https://mosdac.gov.in/sites/all/modules/social_media_links/libraries/elegantthemes/PNG/rss.png",
+        "alt": "RSS icon"
+      },
+      {
+        "src": "/docs/cqw_logo.gif",
+        "alt": "CQW LOGO"
+      },
+      {
+        "src": "https://mosdac.gov.in/sites/default/files/styles/thumbnail/public/logo-transparent.png?itok=IUS20l-w",
+        "alt": "ISRO"
+      },
+      {
+        "src": "https://mosdac.gov.in/sites/default/files/styles/thumbnail/public/saclogo.png?itok=_Jv4AuIn",
+        "alt": "Space Applications Center"
+      },
+      {
+        "src": "https://mosdac.gov.in/sites/default/files/styles/thumbnail/public/india-gov_0.png?itok=yssAPH3m",
+        "alt": "NationalPortal"
+      },
+      {
+        "src": "https://mosdac.gov.in/sites/default/files/styles/thumbnail/public/mygov_0.png?itok=Po-dzdT3",
+        "alt": "MyGov"
+      },
+      {
+        "src": "https://mosdac.gov.in/sites/default/files/styles/thumbnail/public/digital-india_0.png?itok=ntlP7atE",
+        "alt": "DigitalIndia"
+      },
+      {
+        "src": "https://mosdac.gov.in/sites/default/files/styles/thumbnail/public/data-gov.png?itok=qYA78FgB",
+        "alt": "DataPortal"
+      }
+    ]
+  }
+}

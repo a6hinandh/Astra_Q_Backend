@@ -1,0 +1,731 @@
+{
+  "url": "https://mosdac.gov.in/#top",
+  "content": {
+    "text": "Skip to main Content\n\n-A\nA\n+A\nA\nA\nहिन्दी\nEnglish\nSecondary menu\nSignUp Login Logout\nMeteorological & Oceanographic Satellite Data Archival Centre\nSpace Applications Centre, ISRO\nHome\nMissions\n»\nINSAT-3DR\nINSAT-3D\nKALPANA-1\nINSAT-3A\nMeghaTropiques\nSARAL-AltiKa\nOCEANSAT-2\nOCEANSAT-3\nINSAT-3DS\nSCATSAT-1\nCatalog\n»\nSatellite\nInsitu (AWS)\nRADAR\nGalleries\n»\nSatellite Products\nWeather Forecast\nOcean Forecast\nRADAR (DWR)\nGlobal Ocean Current\nData Access\n»\nOrder Data\nOpen Data\n»\nAtmosphere\n»\nBayesian based MT-SAPHIR rainfall\nGPS derived Integrated water vapour\nGSMap ISRO Rain\nMETEOSAT8 Cloud Properties\nLand\n»\n3D Volumetric TERLS DWRproduct\nInland Water Height\nRiver Discharge\nSoil Moisture\nOcean\n»\nGlobal Ocean Surface Current\nHigh Resolution Sea Surface Salinity\nIndian Mainland Coastal Product\nOcean Subsurface\nOceanic Eddies Detection\nSea Ice Occurrence Probability\nWave based Renewable Energy\nCal-Val\nForecast\nRSS Feeds\nReports\n»\nCalibration\n»\nInsitu\nRelative\nValidation\nData Quality\nWeather\nAtlases\nTools\nSitemap\nHelp\nSatellite Images RADAR Weather OceanState LIVE\nFullscreen\nServices\nForecast\n(active tab)\n Nowcast Current Events Alerts Met Applications Ocean Applications\nCITY WEATHER\n\n3-HOURLY WEATHER FORECAST.\n\n \nCOLD WAVES\n\nCOLD WAVE PREDICTION OVER INDIA (WRF MODEL)\n\n \nCYCLONE\n\nSAT. BASED CYCLONE OBSER. AND REALTIME PRED. OVER IO.\n\n \nHEAT WAVES\n\nHEAT WAVE PREDICTION OVER INDIA (WRF MODEL)\n\n \nHEAVY RAIN\n\nHEAVY RAIN (>5MM/HR) FORECAST USING NWP MODEL.\n\n \nLIGHTNING\n\nLIGHTNING FORECAST\n\n \nMONSOON\n\nMONSOON PREDICTION 2024\n\n \nSEA STATE\n\nSEA STATE FORECAST IN TERMS OF WAVE HEIGHT, WAVE PERIOD ETC.\n\n \nSOLAR & WIND\n\n3 DAYS SOLAR AND WIND FORECAST FOR EVERY 15 MINUTES\n\nAnnouncements\nMonsoon Onset Prediction over Kerala (2024) | PDF, Tool: PDFViewer, Size: 763.84 KB | 20-May-24\nOnset over Kerala - Monsoon 2023 | PDF, Tool: PDFViewer, Size: 463.15 KB | 15-May-23\nINSAT Product Version Information | PDF, Tool: PDFViewer, Size: 1.61 MB | 01-Sep-22\nSFTP Services for Data Download | PDF, Tool: PDFViewer, Size: 347.33 KB | 08-Nov-21\narchive\nSEARCH\nSearch\nFOLLOW US\n\nWebsite owned and maintained by MOSDAC, Space Applications Centre, Indian Space Research Organisation, Govt. of INDIA.\n\nFeedback\nAbout Us\nContact Us\nCopyright Policy\nData Access Policy\nHyperlink Policy\nPrivacy Policy\nWebsite Policies\nTerms & Conditions\nFAQs\n \n \n \n \n \n\n\"Ver 3.0; Last reviewed and updated on 19 Jul, 2025& Served By: Web-Srv-Pri",
+    "tables": [],
+    "links": [
+      {
+        "href": "#main-content",
+        "text": "Skip to main Content"
+      },
+      {
+        "href": "javascript:;",
+        "text": "-A"
+      },
+      {
+        "href": "javascript:;",
+        "text": "A"
+      },
+      {
+        "href": "javascript:;",
+        "text": "+A"
+      },
+      {
+        "href": "javascript:drupalHighContrast.enableStyles()",
+        "text": "A"
+      },
+      {
+        "href": "javascript:drupalHighContrast.disableStyles()",
+        "text": "A"
+      },
+      {
+        "href": "/internal/registration",
+        "text": "SignUp"
+      },
+      {
+        "href": "/internal/uops",
+        "text": "Login"
+      },
+      {
+        "href": "/internal/logout",
+        "text": "Logout"
+      },
+      {
+        "href": "/",
+        "text": ""
+      },
+      {
+        "href": "/",
+        "text": "Meteorological & Oceanographic Satellite Data Archival Centre"
+      },
+      {
+        "href": "/",
+        "text": "Home"
+      },
+      {
+        "href": "#",
+        "text": "Missions\n»"
+      },
+      {
+        "href": "/insat-3dr",
+        "text": "INSAT-3DR"
+      },
+      {
+        "href": "/insat-3d",
+        "text": "INSAT-3D"
+      },
+      {
+        "href": "/kalpana-1",
+        "text": "KALPANA-1"
+      },
+      {
+        "href": "/insat-3a",
+        "text": "INSAT-3A"
+      },
+      {
+        "href": "/megha-tropiques",
+        "text": "MeghaTropiques"
+      },
+      {
+        "href": "/saral-altika",
+        "text": "SARAL-AltiKa"
+      },
+      {
+        "href": "/oceansat-2",
+        "text": "OCEANSAT-2"
+      },
+      {
+        "href": "/oceansat-3",
+        "text": "OCEANSAT-3"
+      },
+      {
+        "href": "/insat-3ds",
+        "text": "INSAT-3DS"
+      },
+      {
+        "href": "/scatsat-1",
+        "text": "SCATSAT-1"
+      },
+      {
+        "href": "#",
+        "text": "Catalog\n»"
+      },
+      {
+        "href": "/internal/catalog-satellite",
+        "text": "Satellite"
+      },
+      {
+        "href": "/internal/catalog-insitu",
+        "text": "Insitu (AWS)"
+      },
+      {
+        "href": "/internal/catalog-radar",
+        "text": "RADAR"
+      },
+      {
+        "href": "#",
+        "text": "Galleries\n»"
+      },
+      {
+        "href": "/internal/gallery",
+        "text": "Satellite Products"
+      },
+      {
+        "href": "/internal/gallery/weather",
+        "text": "Weather Forecast"
+      },
+      {
+        "href": "/internal/gallery/ocean",
+        "text": "Ocean Forecast"
+      },
+      {
+        "href": "/internal/gallery/dwr",
+        "text": "RADAR (DWR)"
+      },
+      {
+        "href": "/internal/gallery/current",
+        "text": "Global Ocean Current"
+      },
+      {
+        "href": "#",
+        "text": "Data Access\n»"
+      },
+      {
+        "href": "/internal/uops",
+        "text": "Order Data"
+      },
+      {
+        "href": "#",
+        "text": "Open Data\n»"
+      },
+      {
+        "href": "#",
+        "text": "Atmosphere\n»"
+      },
+      {
+        "href": "/bayesian-based-mt-saphir-rainfall",
+        "text": "Bayesian based MT-SAPHIR rainfall"
+      },
+      {
+        "href": "/gps-derived-integrated-water-vapour",
+        "text": "GPS derived Integrated water vapour"
+      },
+      {
+        "href": "/gsmap-isro-rain",
+        "text": "GSMap ISRO Rain"
+      },
+      {
+        "href": "/meteosat8-cloud-properties",
+        "text": "METEOSAT8 Cloud Properties"
+      },
+      {
+        "href": "#",
+        "text": "Land\n»"
+      },
+      {
+        "href": "/3d-volumetric-terls-dwrproduct",
+        "text": "3D Volumetric TERLS DWRproduct"
+      },
+      {
+        "href": "/inland-water-height",
+        "text": "Inland Water Height"
+      },
+      {
+        "href": "/river-discharge",
+        "text": "River Discharge"
+      },
+      {
+        "href": "/soil-moisture-0",
+        "text": "Soil Moisture"
+      },
+      {
+        "href": "#",
+        "text": "Ocean\n»"
+      },
+      {
+        "href": "/global-ocean-surface-current",
+        "text": "Global Ocean Surface Current"
+      },
+      {
+        "href": "/high-resolution-sea-surface-salinity",
+        "text": "High Resolution Sea Surface Salinity"
+      },
+      {
+        "href": "/indian-mainland-coastal-product",
+        "text": "Indian Mainland Coastal Product"
+      },
+      {
+        "href": "/ocean-subsurface",
+        "text": "Ocean Subsurface"
+      },
+      {
+        "href": "/oceanic-eddies-detection",
+        "text": "Oceanic Eddies Detection"
+      },
+      {
+        "href": "/sea-ice-occurrence-probability",
+        "text": "Sea Ice Occurrence Probability"
+      },
+      {
+        "href": "/wave-based-renewable-energy",
+        "text": "Wave based Renewable Energy"
+      },
+      {
+        "href": "/internal/calval-data",
+        "text": "Cal-Val"
+      },
+      {
+        "href": "/internal/forecast-menu",
+        "text": "Forecast"
+      },
+      {
+        "href": "/rss-feed",
+        "text": "RSS Feeds"
+      },
+      {
+        "href": "#",
+        "text": "Reports\n»"
+      },
+      {
+        "href": "#",
+        "text": "Calibration\n»"
+      },
+      {
+        "href": "/insitu",
+        "text": "Insitu"
+      },
+      {
+        "href": "/calibration-reports",
+        "text": "Relative"
+      },
+      {
+        "href": "/validation-reports",
+        "text": "Validation"
+      },
+      {
+        "href": "/data-quality",
+        "text": "Data Quality"
+      },
+      {
+        "href": "/weather-reports",
+        "text": "Weather"
+      },
+      {
+        "href": "/atlases",
+        "text": "Atlases"
+      },
+      {
+        "href": "/tools",
+        "text": "Tools"
+      },
+      {
+        "href": "/sitemap",
+        "text": "Sitemap"
+      },
+      {
+        "href": "/help",
+        "text": "Help"
+      },
+      {
+        "href": "/node?qt-latest_products=0#qt-latest_products",
+        "text": "Satellite Images"
+      },
+      {
+        "href": "/node?qt-latest_products=1#qt-latest_products",
+        "text": "RADAR"
+      },
+      {
+        "href": "/node?qt-latest_products=2#qt-latest_products",
+        "text": "Weather"
+      },
+      {
+        "href": "/node?qt-latest_products=3#qt-latest_products",
+        "text": "OceanState"
+      },
+      {
+        "href": "/node?qt-latest_products=4#qt-latest_products",
+        "text": "LIVE"
+      },
+      {
+        "href": "/imageshow",
+        "text": ""
+      },
+      {
+        "href": "https://mosdac.gov.in/gallery/index.html?&prod=3SIMG_%2A_L1B_STD_IR1_V%2A.jpg",
+        "text": "Fullscreen"
+      },
+      {
+        "href": "/node?qt-services_quicktab=0#qt-services_quicktab",
+        "text": "Forecast\n(active tab)"
+      },
+      {
+        "href": "/node?qt-services_quicktab=1#qt-services_quicktab",
+        "text": "Nowcast"
+      },
+      {
+        "href": "/node?qt-services_quicktab=2#qt-services_quicktab",
+        "text": "Current Events"
+      },
+      {
+        "href": "/node?qt-services_quicktab=3#qt-services_quicktab",
+        "text": "Alerts"
+      },
+      {
+        "href": "/node?qt-services_quicktab=4#qt-services_quicktab",
+        "text": "Met Applications"
+      },
+      {
+        "href": "/node?qt-services_quicktab=5#qt-services_quicktab",
+        "text": "Ocean Applications"
+      },
+      {
+        "href": "https://mosdac.gov.in/internal/weather",
+        "text": "CITY WEATHER\n\n3-HOURLY WEATHER FORECAST."
+      },
+      {
+        "href": "https://mosdac.gov.in/internal/coldwave",
+        "text": "COLD WAVES\n\nCOLD WAVE PREDICTION OVER INDIA (WRF MODEL)"
+      },
+      {
+        "href": "https://mosdac.gov.in/internal/cyclone",
+        "text": "CYCLONE\n\nSAT. BASED CYCLONE OBSER. AND REALTIME PRED. OVER IO."
+      },
+      {
+        "href": "https://mosdac.gov.in/internal/heat-cold-wave",
+        "text": "HEAT WAVES\n\nHEAT WAVE PREDICTION OVER INDIA (WRF MODEL)"
+      },
+      {
+        "href": "https://mosdac.gov.in/internal/forecast-heavyrain",
+        "text": "HEAVY RAIN\n\nHEAVY RAIN (>5MM/HR) FORECAST USING NWP MODEL."
+      },
+      {
+        "href": "https://mosdac.gov.in/internal/lightning",
+        "text": "LIGHTNING\n\nLIGHTNING FORECAST"
+      },
+      {
+        "href": "https://mosdac.gov.in/internal/monsoon",
+        "text": "MONSOON\n\nMONSOON PREDICTION 2024"
+      },
+      {
+        "href": "https://mosdac.gov.in/internal/sea-state-forecast",
+        "text": "SEA STATE\n\nSEA STATE FORECAST IN TERMS OF WAVE HEIGHT, WAVE PERIOD ETC."
+      },
+      {
+        "href": "https://mosdac.gov.in/internal/energy",
+        "text": "SOLAR & WIND\n\n3 DAYS SOLAR AND WIND FORECAST FOR EVERY 15 MINUTES"
+      },
+      {
+        "href": "https://mosdac.gov.in/internal/nowcast-cloudburst",
+        "text": "Cloud Burst\nCloud Burst Nowcast for 6 hours over Western Himalayan region."
+      },
+      {
+        "href": "https://mosdac.gov.in/internal/nowcast-heavyrain",
+        "text": "Heavy Rain\nSatellite based nowcast for Heavy rain events for 6 hours."
+      },
+      {
+        "href": "https://mosdac.gov.in/internal/aws",
+        "text": "AWS Time Series\nAWS Time Series"
+      },
+      {
+        "href": "https://mosdac.gov.in/internal/event-heavyrain",
+        "text": "Heavy Rain\nHeavy Rain Events"
+      },
+      {
+        "href": "https://mosdac.gov.in/internal/live",
+        "text": "MOSDAC LIVE\nLet's Interactively Visualise the Earth (LIVE)"
+      },
+      {
+        "href": "https://mosdac.gov.in/internal/state",
+        "text": "Indian State Portal\nAlerts for Indian States"
+      },
+      {
+        "href": "https://mosdac.gov.in/internal/afs-seac",
+        "text": "South East Asian Countries\nAlerts for South East Asian Countries"
+      },
+      {
+        "href": "https://mosdac.gov.in/internal/urja",
+        "text": "Urja\nSolar Energy"
+      },
+      {
+        "href": "https://mosdac.gov.in/internal/varsha",
+        "text": "VARSHA\nRainfall"
+      },
+      {
+        "href": "https://mosdac.gov.in/internal/vayu",
+        "text": "VAYU\nAir Quality"
+      },
+      {
+        "href": "https://mosdac.gov.in/internal/soil-wetness",
+        "text": "Soil Moisture\nSoil Wetness Index"
+      },
+      {
+        "href": "https://mosdac.gov.in/internal/cyclone",
+        "text": "SCORPIO\nSat. Based Cyclone Obser. and Realtime Pred. over IO."
+      },
+      {
+        "href": "https://mosdac.gov.in/internal/oilspill",
+        "text": "OIL SPILL\nALTIMETER LCS-CORES AND STRETCHING DIRECTIONS"
+      },
+      {
+        "href": "https://mosdac.gov.in/internal/ocean",
+        "text": "Ocean Subsurface Fields\nOcean Subsurface Fields"
+      },
+      {
+        "href": "https://mosdac.gov.in/internal/rip",
+        "text": "Safe Beach\nRIP Current Forecast for All-India beaches."
+      },
+      {
+        "href": "https://mosdac.gov.in/internal/ocean-eye",
+        "text": "Ocean-Eye\nOcean State Forecast"
+      },
+      {
+        "href": "https://mosdac.gov.in/internal/eddy",
+        "text": "Eddy Currents\nEddy Currents"
+      },
+      {
+        "href": "https://mosdac.gov.in/sites/default/files/docs/Onset%20Prediction%202024.pdf",
+        "text": "Monsoon Onset Prediction over Kerala (2024)"
+      },
+      {
+        "href": "https://mosdac.gov.in/sites/default/files/docs/Onset%20Prediction%202023.pdf",
+        "text": "Onset over Kerala - Monsoon 2023"
+      },
+      {
+        "href": "https://mosdac.gov.in/sites/default/files/docs/INSAT_Product_Version_information_V01.pdf",
+        "text": "INSAT Product Version Information"
+      },
+      {
+        "href": "https://mosdac.gov.in/sites/default/files/docs/sftp-mosdac_0.pdf",
+        "text": "SFTP Services for Data Download"
+      },
+      {
+        "href": "/announcements",
+        "text": "archive"
+      },
+      {
+        "href": "https://www.facebook.com/mosdac.sac.isro",
+        "text": ""
+      },
+      {
+        "href": "http://www.youtube.com/channel/UCDVkai9WIgY2ZgrlF_08Yeg",
+        "text": ""
+      },
+      {
+        "href": "https://mosdac.gov.in/rss.xml",
+        "text": ""
+      },
+      {
+        "href": "/docs/STQC.pdf",
+        "text": ""
+      },
+      {
+        "href": "/mosdac-feedback",
+        "text": "Feedback"
+      },
+      {
+        "href": "/about-us",
+        "text": "About Us"
+      },
+      {
+        "href": "/contact-us",
+        "text": "Contact Us"
+      },
+      {
+        "href": "/copyright-policy",
+        "text": "Copyright Policy"
+      },
+      {
+        "href": "/data-access-policy",
+        "text": "Data Access Policy"
+      },
+      {
+        "href": "/hyperlink-policy",
+        "text": "Hyperlink Policy"
+      },
+      {
+        "href": "/privacy-policy",
+        "text": "Privacy Policy"
+      },
+      {
+        "href": "/website-policies",
+        "text": "Website Policies"
+      },
+      {
+        "href": "/terms-conditions",
+        "text": "Terms & Conditions"
+      },
+      {
+        "href": "/faq-page",
+        "text": "FAQs"
+      },
+      {
+        "href": "http://www.isro.gov.in",
+        "text": ""
+      },
+      {
+        "href": "http://www.sac.gov.in",
+        "text": ""
+      },
+      {
+        "href": "http://www.india.gov.in",
+        "text": ""
+      },
+      {
+        "href": "http://mygov.in/",
+        "text": ""
+      },
+      {
+        "href": "http://www.digitalindia.gov.in/",
+        "text": ""
+      },
+      {
+        "href": "http://data.gov.in",
+        "text": ""
+      },
+      {
+        "href": "#",
+        "text": ""
+      },
+      {
+        "href": "#",
+        "text": ""
+      },
+      {
+        "href": "#",
+        "text": ""
+      },
+      {
+        "href": "#",
+        "text": ""
+      },
+      {
+        "href": "#",
+        "text": ""
+      },
+      {
+        "href": "#",
+        "text": ""
+      },
+      {
+        "href": "#",
+        "text": ""
+      },
+      {
+        "href": "#",
+        "text": ""
+      },
+      {
+        "href": "#",
+        "text": ""
+      },
+      {
+        "href": "#",
+        "text": ""
+      },
+      {
+        "href": "#top",
+        "text": "Back to top"
+      }
+    ],
+    "images": [
+      {
+        "src": "https://mosdac.gov.in/sites/default/files/mosdac_small.png",
+        "alt": "Home"
+      },
+      {
+        "src": "https://mosdac.gov.in/sites/default/files/styles/app-thumbs/public/field/image/weather.jpg?itok=me1X6l-u",
+        "alt": "Weather Forecast"
+      },
+      {
+        "src": "https://mosdac.gov.in/sites/default/files/styles/app-thumbs/public/field/image/coldwave.jpg?itok=lmF4zeLb",
+        "alt": "Cold Waves"
+      },
+      {
+        "src": "https://mosdac.gov.in/sites/default/files/styles/app-thumbs/public/field/image/cyclone1.jpg?itok=vPe-uR_Q",
+        "alt": ""
+      },
+      {
+        "src": "https://mosdac.gov.in/sites/default/files/styles/app-thumbs/public/field/image/waves.jpg?itok=FH2Y2Kx5",
+        "alt": "Heat Waves"
+      },
+      {
+        "src": "https://mosdac.gov.in/sites/default/files/styles/app-thumbs/public/field/image/rainfall_0.jpg?itok=lnMS05Ux",
+        "alt": "HeavyRain Forecast"
+      },
+      {
+        "src": "https://mosdac.gov.in/sites/default/files/styles/app-thumbs/public/field/image/light.jpg?itok=HG-EInNU",
+        "alt": "Lightning"
+      },
+      {
+        "src": "https://mosdac.gov.in/sites/default/files/styles/app-thumbs/public/field/image/download.jpg?itok=DUCkXdHK",
+        "alt": "Monsoon Prediction"
+      },
+      {
+        "src": "https://mosdac.gov.in/sites/default/files/styles/app-thumbs/public/field/image/sea-state.jpg?itok=eojilMxA",
+        "alt": "Sea State Forecast"
+      },
+      {
+        "src": "https://mosdac.gov.in/sites/default/files/styles/app-thumbs/public/field/image/energy.jpg?itok=cH0XNUWK",
+        "alt": "Solar & Wind"
+      },
+      {
+        "src": "https://mosdac.gov.in/sites/default/files/styles/app-thumbs/public/field/image/cloud-burst.jpeg?itok=GS9Yo886",
+        "alt": "Cloud burst Nowcast Alerts"
+      },
+      {
+        "src": "https://mosdac.gov.in/sites/default/files/styles/app-thumbs/public/field/image/rainyseason.jpeg?itok=n7H5GxSp",
+        "alt": "Heavy Rain Nowcast"
+      },
+      {
+        "src": "https://mosdac.gov.in/sites/default/files/styles/app-thumbs/public/field/image/aws-time-series.PNG?itok=hox5zRJF",
+        "alt": "AWS Time Series"
+      },
+      {
+        "src": "https://mosdac.gov.in/sites/default/files/styles/app-thumbs/public/field/image/heavyrain_event.jpg?itok=lrcgAqkg",
+        "alt": "Heavy Rain Events"
+      },
+      {
+        "src": "https://mosdac.gov.in/sites/default/files/styles/app-thumbs/public/field/image/live.png?itok=L3bGLC2g",
+        "alt": "MOSDAC-LIVE"
+      },
+      {
+        "src": "https://mosdac.gov.in/sites/default/files/styles/app-thumbs/public/field/image/indian-states_0.png?itok=I3lp0ef2",
+        "alt": "Indian State"
+      },
+      {
+        "src": "https://mosdac.gov.in/sites/default/files/styles/app-thumbs/public/field/image/saarc.png?itok=hVJmY4KF",
+        "alt": "South East Asian"
+      },
+      {
+        "src": "https://mosdac.gov.in/sites/default/files/styles/app-thumbs/public/field/image/urjaService.png?itok=1yEEoyOY",
+        "alt": "Urja Image"
+      },
+      {
+        "src": "https://mosdac.gov.in/sites/default/files/styles/app-thumbs/public/field/image/rainfall.jpg?itok=U6xL3U-d",
+        "alt": "rainfall"
+      },
+      {
+        "src": "https://mosdac.gov.in/sites/default/files/styles/app-thumbs/public/field/image/airq.PNG?itok=SAdlITzR",
+        "alt": "Air Quality"
+      },
+      {
+        "src": "https://mosdac.gov.in/sites/default/files/styles/app-thumbs/public/field/image/swi-smap.jpg?itok=5E70NrgO",
+        "alt": "Soil Wetness Index"
+      },
+      {
+        "src": "https://mosdac.gov.in/sites/default/files/styles/app-thumbs/public/field/image/cyclone.jpg?itok=MSFX1kVy",
+        "alt": "Cyclone"
+      },
+      {
+        "src": "https://mosdac.gov.in/sites/default/files/styles/app-thumbs/public/field/image/oil_image.png?itok=yK2ZHpfX",
+        "alt": "Oil Spill"
+      },
+      {
+        "src": "https://mosdac.gov.in/sites/default/files/styles/app-thumbs/public/field/image/ocean_subsurface_0.jpg?itok=9G9XRCyQ",
+        "alt": "Ocean Subsurface Fields"
+      },
+      {
+        "src": "https://mosdac.gov.in/sites/default/files/styles/app-thumbs/public/field/image/rip_current_forecast.jpg?itok=hWTHw_z2",
+        "alt": "Safe Beach"
+      },
+      {
+        "src": "https://mosdac.gov.in/sites/default/files/styles/app-thumbs/public/field/image/ocean-eye.jpg?itok=J1Q9gsRD",
+        "alt": "Ocean eye (Ocean state forecast)"
+      },
+      {
+        "src": "https://mosdac.gov.in/sites/default/files/styles/app-thumbs/public/field/image/eddy_0.png?itok=Ig0XNSnU",
+        "alt": "Eddy Currents"
+      },
+      {
+        "src": "https://mosdac.gov.in/sites/all/modules/social_media_links/libraries/elegantthemes/PNG/facebook.png",
+        "alt": "Facebook icon"
+      },
+      {
+        "src": "https://mosdac.gov.in/sites/all/modules/social_media_links/libraries/elegantthemes/PNG/youtube.png",
+        "alt": "Youtube (Channel) icon"
+      },
+      {
+        "src": "https://mosdac.gov.in/sites/all/modules/social_media_links/libraries/elegantthemes/PNG/rss.png",
+        "alt": "RSS icon"
+      },
+      {
+        "src": "/docs/cqw_logo.gif",
+        "alt": "CQW LOGO"
+      },
+      {
+        "src": "https://mosdac.gov.in/sites/default/files/styles/thumbnail/public/logo-transparent.png?itok=IUS20l-w",
+        "alt": "ISRO"
+      },
+      {
+        "src": "https://mosdac.gov.in/sites/default/files/styles/thumbnail/public/saclogo.png?itok=_Jv4AuIn",
+        "alt": "Space Applications Center"
+      },
+      {
+        "src": "https://mosdac.gov.in/sites/default/files/styles/thumbnail/public/india-gov_0.png?itok=yssAPH3m",
+        "alt": "NationalPortal"
+      },
+      {
+        "src": "https://mosdac.gov.in/sites/default/files/styles/thumbnail/public/mygov_0.png?itok=Po-dzdT3",
+        "alt": "MyGov"
+      },
+      {
+        "src": "https://mosdac.gov.in/sites/default/files/styles/thumbnail/public/digital-india_0.png?itok=ntlP7atE",
+        "alt": "DigitalIndia"
+      },
+      {
+        "src": "https://mosdac.gov.in/sites/default/files/styles/thumbnail/public/data-gov.png?itok=qYA78FgB",
+        "alt": "DataPortal"
+      }
+    ]
+  }
+}
