@@ -12,7 +12,7 @@ from langchain_core.prompts import PromptTemplate
 
 CURRENT_DIR = Path(__file__).resolve().parent
 BASE_DIR = CURRENT_DIR.parent  # adjust if kg_pipeline is nested differently
-ENV_PATH = BASE_DIR / "config" / ".env"
+ENV_PATH = CURRENT_DIR / ".env"
 
 load_dotenv(ENV_PATH)
 
@@ -82,9 +82,9 @@ CYPHER_GENERATION_PROMPT = PromptTemplate(
 )
 
 graph = Neo4jGraph(
-    url=os.getenv("NEO4J_URI"),
-    username=os.getenv("NEO4J_USER"),
-    password=os.getenv("NEO4J_PASSWORD"),
+    url=os.getenv("NEO4J_URI").strip(),
+    username=os.getenv("NEO4J_USERNAME").strip(),
+    password=os.getenv("NEO4J_PASSWORD").strip(),
 )
 
 llm = ChatGoogleGenerativeAI(
@@ -105,8 +105,19 @@ chain = GraphCypherQAChain.from_llm(
 
 # ---------------- PUBLIC HELPER ----------------
 
-def ask_kg(question: str) -> Dict[str, Any]:
-    result = chain.invoke({"query": question})
+def ask_kg(question: str, history: list | None = None) -> Dict[str, Any]:
+    history_prefix = ""
+    if history:
+        last = history[-6:]  # keep it short
+        lines = []
+        for msg in last:
+            prefix = "User:" if msg["role"] == "user" else "Assistant:"
+            lines.append(f"{prefix} {msg['content']}")
+        history_prefix = "\n".join(lines) + "\n\n"
+
+    # 2) Feed a history-aware question into the chain
+    history_aware_question = history_prefix + f"User's current question: {question}"
+    result = chain.invoke({"query": history_aware_question})
     steps = result.get("intermediate_steps", [])
 
     cypher = ""

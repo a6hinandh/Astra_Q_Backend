@@ -9,6 +9,7 @@ __pycache__/
 # Environment file
 myenv/
 
+serviceAccountKey.json
 # Distribution / packaging
 .Python
 build/

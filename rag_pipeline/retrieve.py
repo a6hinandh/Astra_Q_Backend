@@ -121,9 +121,22 @@ def extract_fallback_keyword(query: str) -> str:
 
 def run_rag_pipeline(
     query: str,
+    history: list | None = None,
     use_fallback: bool = True,
     fallback_keyword: str = None,
 ) -> dict:
+    
+    # Building a history-aware query text for Gemini (but NOT for retriever)
+    history_prefix = "" 
+    if history:
+        last = history[-6:]
+        lines = []
+        for msg in last:
+            prefix = "User:" if msg["role"] =="user" else "Assistant:"
+            lines.append(f"{prefix} {msg['content']}")
+        history_prefix="\n".join(lines) + "\n\n"
+        history_aware_query = history_prefix + f"User's current question: {query}"
+
     # Auto-extract fallback keyword if not provided
     if not fallback_keyword:
         fallback_keyword = extract_fallback_keyword(query)
@@ -142,7 +155,7 @@ def run_rag_pipeline(
 
     # Get final answer from Gemini
     answer = rag_qa(
-        query,
+        history_aware_query,
         use_fallback=use_fallback,
         fallback_keyword=fallback_keyword,
     )

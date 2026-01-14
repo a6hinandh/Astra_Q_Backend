@@ -155,6 +155,8 @@ class EnhancedNeo4jPopulator:
         self.driver.close()
 
     def clear_database(self):
+        print("USING URI:", self.driver._pool.address)
+
         """Clear all nodes and relationships"""
         with self.driver.session() as session:
             session.run("MATCH (n) DETACH DELETE n")
@@ -353,7 +355,7 @@ class EnhancedNeo4jPopulator:
 
 def main():
     NEO4J_URI = os.getenv("NEO4J_URI")
-    NEO4J_USER = os.getenv("NEO4J_USER")
+    NEO4J_USER = os.getenv("NEO4J_USERNAME")
     NEO4J_PASSWORD = os.getenv("NEO4J_PASSWORD")
 
     populator = EnhancedNeo4jPopulator(NEO4J_URI, NEO4J_USER, NEO4J_PASSWORD)
