@@ -95,7 +95,7 @@ Instructions:
 - Only if the context truly has no relevant information to answer the question, respond with exactly: I don't know the answer.
 - Do NOT say you don't know just because access details (download URL, portal path) are missing.
 
-Answer in one concise sentence:
+Answer in a paragraph format.:
 """
 
 

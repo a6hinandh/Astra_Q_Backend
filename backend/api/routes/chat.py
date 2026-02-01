@@ -7,7 +7,6 @@ from kg_pipeline.kg_nl_demo import ask_kg
 from backend.api.router_logic import decide_mode, Mode
 from backend.session.firebase_session import append_message, get_history
 
-
 router = APIRouter()
 
 
@@ -35,6 +34,12 @@ class ChatResponse(BaseModel):
     answer: str
     sources: List[Source]
     mode: Mode
+
+
+class HistoryItem(BaseModel):
+    role: str
+    content: str
+    timestamp: Optional[Any] = None
 
 
 @router.post("/chat", response_model=ChatResponse)
@@ -69,7 +74,7 @@ async def chat(payload: ChatRequest) -> ChatResponse:
     if mode in (Mode.RAG, Mode.BOTH):
         rag_result = run_rag_pipeline(payload.message, history=history_for_llm)
 
-    # 7) Fusion logic (unchanged structure, but we’ll capture final_answer)
+    # 7) Fusion logic
     # KG only
     if mode == Mode.KG and kg_result:
         answer = kg_result["answer"]
@@ -94,7 +99,6 @@ async def chat(payload: ChatRequest) -> ChatResponse:
         answer = rag_result["answer"]
         append_message(user_id, thread_id, "assistant", answer)
 
-        # Adapt to your actual rag_result["sources"] structure if needed
         sources = [
             Source(
                 source=s.get("source", ""),
@@ -148,3 +152,22 @@ async def chat(payload: ChatRequest) -> ChatResponse:
         sources=combined_sources,
         mode=mode,
     )
+
+
+@router.get("/thread/{thread_id}", response_model=List[HistoryItem])
+async def get_thread_history(thread_id: str, user_id: str) -> List[HistoryItem]:
+    """
+    Return all messages for a given user/thread, ordered by timestamp ascending.
+    Used by the frontend to reopen an existing thread.
+    """
+    stored_history = get_history(user_id, thread_id)
+    # stored_history items: {"id", "role", "content", "timestamp"}
+
+    return [
+        HistoryItem(
+            role=item["role"],
+            content=item["content"],
+            timestamp=item.get("timestamp"),
+        )
+        for item in stored_history
+    ]

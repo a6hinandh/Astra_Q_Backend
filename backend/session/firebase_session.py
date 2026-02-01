@@ -1,4 +1,3 @@
-# backend/session/firebase_session.py
 import os
 from typing import List, Dict, Optional
 
@@ -85,7 +84,6 @@ def get_history(user_id: str, thread_id: str) -> List[Dict]:
             }
         )
     return history
-
 
 # Firestore chat structure:
 #
