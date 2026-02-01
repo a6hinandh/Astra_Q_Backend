@@ -8,11 +8,11 @@ _db: Optional[firestore.Client] = None
 
 
 def init_firebase() -> firestore.Client:
-    """Initialize Firebase app and return a Firestore client."""
+   
     global _db
 
     if firebase_admin._apps:
-        # Already initialized
+     
         _db = firestore.client()
         return _db
 
@@ -27,7 +27,7 @@ def init_firebase() -> firestore.Client:
 
 
 def get_db() -> firestore.Client:
-    """Get a Firestore client, initializing if needed."""
+    
     global _db
     if _db is None:
         return init_firebase()

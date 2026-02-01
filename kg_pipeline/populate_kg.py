@@ -11,14 +11,12 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-# Path to your metadata_report.txt (adjust if needed)
+
 METADATA_REPORT_PATH = os.path.join(
     os.path.dirname(__file__),
     "metadata_report.txt"
 )
 
-# Map raw parameter strings from metadata_report to normalized KG parameters
-# Now includes a human-readable display_name as 4th element
 PARAM_MAP = {
     "Rainfall": ("rainfall", "atmosphere", "mm/hr", "Rainfall"),
     "Ocean": ("ocean_variable", "ocean", None, "Ocean parameters"),
