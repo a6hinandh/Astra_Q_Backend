@@ -1,133 +1,119 @@
-<p align="center">
-  <img src="https://img.shields.io/badge/Python-3.9+-blue.svg" alt="Python Version">
-  <img src="https://img.shields.io/badge/License-MIT-green.svg" alt="License">
-</p>
+# Astra_Q Backend
 
-# Astra_Q_Backend: RAG-based MOSDAC Satellite Data Q&A
-
-Astra_Q_Backend is a Retrieval Augmented Generation (RAG) system designed to provide intelligent answers to questions about MOSDAC (Meteorological & Oceanographic Satellite Data Archival Centre) satellite data products. By combining semantic search with a powerful large language model, it aims to deliver accurate and context-aware information from a specialized knowledge base.
+A hybrid Retrieval‑Augmented Generation (RAG) + Knowledge Graph (KG) backend for MOSDAC‑style satellite data queries.  
+The service is built with **FastAPI**, **Neo4j**, **FAISS**, **Google Gemini**, and **Firebase**.
 
 ## Features
 
-- **Retrieval Augmented Generation (RAG):** Integrates document retrieval with a generative AI model to provide informed answers.
-- **Semantic Search:** Utilizes a FAISS vector store for efficient and relevant document retrieval based on semantic similarity.
-- **Fallback Keyword Search:** Implements a keyword-based fallback mechanism if semantic search yields no relevant results, ensuring broader coverage.
-- **Generative AI (Gemini):** Leverages Google's Gemini 2.5 Flash Lite model for natural language understanding and generation.
-- **Context-Aware Conversations:** Supports history-aware prompting for the LLM to maintain conversational flow.
-- **Source Attribution:** Provides snippets from the retrieved documents to back up the generated answers.
-- **Extensible:** Built on LangChain, allowing for easy integration of different models and data sources.
+- **KG** – Cypher‑based queries powered by Neo4j and Gemini.
+- **RAG** – Semantic search over a FAISS vector store built from parsed docs.
+- **Hybrid** – Automatic mode selection (KG, RAG, or BOTH) based on the user query.
+- **Firestore** – Conversation history persistence.
+- **CORS** – Configurable via environment variables.
+- **Health check** – `/health` endpoint for deployment monitoring.
 
-## Technology Stack
+## Local Setup
 
-- **Python:** The primary programming language.
-- **LangChain:** Framework for developing applications powered by language models.
-- **HuggingFace Embeddings:** Used with `sentence-transformers/all-MiniLM-L6-v2` for generating document embeddings.
-- **FAISS:** (Facebook AI Similarity Search) A library for efficient similarity search and clustering of dense vectors.
-- **Google Gemini API:** Provides access to Google's generative AI models.
-- **SpaCy:** Used for natural language processing tasks, specifically for named entity recognition and keyword extraction.
-- **`python-dotenv`:** For managing environment variables.
+1. **Clone the repo**  
+   ```bash
+   git clone https://github.com/your-org/Astra_Q_Backend.git
+   cd Astra_Q_Backend
+   ```
 
-## Installation
+2. **Create a virtual environment**  
+   ```bash
+   python -m venv venv
+   source venv/bin/activate   # Windows: .\venv\Scripts\activate
+   ```
 
-Follow these steps to set up the project locally.
+3. **Install dependencies**  
+   ```bash
+   pip install -r requirements.txt
+   ```
 
-### Prerequisites
+4. **Create a `.env` file**  
+   Copy the example and fill in the values.  
+   ```bash
+   cp .env.example .env
+   ```
 
-- Python 3.9+
-- `pip` (Python package installer)
-- `venv` (Python virtual environment module)
+5. **Run the FastAPI server**  
+   ```bash
+   uvicorn backend.main:app --reload
+   ```
 
-### Steps
+6. **Build the FAISS index (once)**  
+   ```bash
+   python rag_pipeline/build_vector_index.py
+   ```
 
-1.  **Clone the repository:**
-    ```bash
-    git clone https://github.com/gowri/Astra_Q_Backend_fork.git
-    cd Astra_Q_Backend_fork
-    ```
+## Deployment
 
-2.  **Create and activate a virtual environment:**
-    ```bash
-    python -m venv venv
-    # On Windows
-    .\venv\Scripts\activate
-    # On macOS/Linux
-    source venv/bin/activate
-    ```
+The app is ready to be deployed on Render, Railway, or any platform that supports FastAPI.
 
-3.  **Install dependencies:**
-    Create a `requirements.txt` file in the project root with the following content:
-    ```
-    python-dotenv
-    langchain-huggingface
-    langchain-community
-    google-generativeai
-    spacy
-    faiss-cpu
-    sentence-transformers
-    ```
-    Then install them:
-    ```bash
-    pip install -r requirements.txt
-    ```
+### Render
 
-4.  **Download SpaCy model:**
-    ```bash
-    python -m spacy download en_core_web_sm
-    ```
+1. Create a new **Web Service**.  
+2. Set the **Build Command** to `pip install -r requirements.txt`  
+3. Set the **Start Command** to `uvicorn backend.main:app --host 0.0.0.0 --port $PORT`  
+4. Add the environment variables listed in `.env.example`.  
+5. Deploy.
 
-## Setup
+### Railway
 
-### 1. API Keys
+1. Add a new **Service**.  
+2. Use the same build and start commands as Render.  
+3. Add the required environment variables.  
+4. Deploy.
 
-Create a `.env` file in the `kg_pipeline/` directory (e.g., `Astra_Q_Backend_fork/kg_pipeline/.env`) and add your Google API key:
+## API Endpoints
+
+| Endpoint | Method | Description |
+|----------|--------|-------------|
+| `/api/chat` | POST | Main chat endpoint. Accepts `user_id`, `thread_id`, and `message`. |
+| `/api/thread/{thread_id}` | GET | Retrieve conversation history. Requires `user_id` query param. |
+| `/health` | GET | Health check endpoint. Returns `{"status":"ok"}`. |
+
+## Folder Structure
 
 ```
-GOOGLE_API_KEY="YOUR_GEMINI_API_KEY_HERE"
-# Or GEMINI_API_KEY="YOUR_GEMINI_API_KEY_HERE"
+Astra_Q_Backend/
+├── backend/
+│   ├── main.py
+│   ├── api/
+│   │   ├── routes/
+│   │   │   └── chat.py
+│   │   └── router_logic.py
+│   └── session/
+│       └── firebase_session.py
+├── kg_pipeline/
+│   ├── kg_nl_demo.py
+│   ├── populate_kg.py
+│   ├── queries.py
+│   ├── cypher_examples.md
+│   └── metadata_report.txt
+├── rag_pipeline/
+│   ├── build_vector_index.py
+│   ├── retrieve.py
+│   └── store_vectordb.py   # legacy prototype
+├── requirements.txt
+└── .env.example
 ```
 
-### 2. FAISS Vector Store
+## Testing
 
-The system relies on a pre-built FAISS vector store located at `rag_pipeline/faiss_store/`. This directory should contain the serialized FAISS index and document store. This data is typically generated by a separate data ingestion and processing pipeline (e.g., a Knowledge Graph pipeline). Ensure this directory exists and contains valid data for the system to function correctly.
-
-## Usage
-
-To run the RAG pipeline and query the system:
-
-```python
-# Example usage from retrieve.py
-from rag_pipeline.retrieve import run_rag_pipeline
-
-q = "Where is INSAT-3D SST data?"
-resp = run_rag_pipeline(q)
-print("Q:", q)
-print("Answer:", resp["answer"])
-print("Sources:", resp["sources"])
-```
-
-You can also run the `retrieve.py` script directly for a quick test:
+Run the test suite with:
 
 ```bash
-python rag_pipeline/retrieve.py
+pytest
 ```
 
-## Project Structure
-
-```
-Astra_Q_Backend_fork/
-├── rag_pipeline/
-│   ├── retrieve.py             # Main RAG pipeline logic
-│   └── faiss_store/            # Directory for the FAISS vector index and document store
-├── kg_pipeline/
-│   └── .env                    # Environment variables (e.g., API keys)
-├── README.md                   # Project README file
-└── requirements.txt            # Python dependencies
-```
+(Tests are located in the `tests/` directory and cover the chat endpoint, KG queries, and RAG retrieval.)
 
 ## Contributing
 
-Contributions are welcome! Please open an issue or submit a pull request.
+Feel free to open issues or pull requests. Please keep the code style consistent and add tests for new features.
 
 ## License
 
-This project is licensed under the MIT License.
+MIT
