@@ -10,6 +10,7 @@ __pycache__/
 myenv/
 
 serviceAccountKey.json
+backend/serviceAccountKey.json
 # Distribution / packaging
 .Python
 build/
@@ -142,6 +143,7 @@ celerybeat.pid
 .env
 .envrc
 .venv
+.deps-audit-venv/
 env/
 venv/
 ENV/
@@ -226,7 +228,6 @@ static_pipeline/**/*.log
 *.old
 
 # Debug/test artifacts
-test_*.py
 *.test.json
 
 # Local configs or API keys (if any)
@@ -234,3 +235,4 @@ config.yaml
 *.env
 .env.*
 mosdac-scraper/logs/no_cards_20251207_203407.png
+.aider*

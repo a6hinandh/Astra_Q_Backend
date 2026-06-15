@@ -1,119 +1,203 @@
-# Astra_Q Backend
+# Astra-Q Backend
 
-A hybrid Retrieval‑Augmented Generation (RAG) + Knowledge Graph (KG) backend for MOSDAC‑style satellite data queries.  
-The service is built with **FastAPI**, **Neo4j**, **FAISS**, **Google Gemini**, and **Firebase**.
+A hybrid RAG + Knowledge Graph backend for answering questions over MOSDAC satellite and Earth-observation data.
 
-## Features
+## Overview
 
-- **KG** – Cypher‑based queries powered by Neo4j and Gemini.
-- **RAG** – Semantic search over a FAISS vector store built from parsed docs.
-- **Hybrid** – Automatic mode selection (KG, RAG, or BOTH) based on the user query.
-- **Firestore** – Conversation history persistence.
-- **CORS** – Configurable via environment variables.
-- **Health check** – `/health` endpoint for deployment monitoring.
+Astra-Q Backend ingests content from the MOSDAC data portal — static HTML pages, PDF documents, and DOCX files — and powers two complementary query pathways:
 
-## Local Setup
+- **RAG pipeline** — semantic search over a FAISS vector store built from parsed documents.
+- **Knowledge Graph pipeline** — natural-language-to-Cypher querying against a Neo4j graph of satellites, products, parameters, and regions.
 
-1. **Clone the repo**  
-   ```bash
-   git clone https://github.com/your-org/Astra_Q_Backend.git
-   cd Astra_Q_Backend
-   ```
+A FastAPI chat endpoint selects the appropriate mode (KG, RAG, or both) per question, generates answers via Google Gemini, and persists conversation history to Firebase Firestore.
 
-2. **Create a virtual environment**  
-   ```bash
-   python -m venv venv
-   source venv/bin/activate   # Windows: .\venv\Scripts\activate
-   ```
+## Key Features
 
-3. **Install dependencies**  
-   ```bash
-   pip install -r requirements.txt
-   ```
+- Static MOSDAC crawling and document download
+- PDF and DOCX parsing with text extraction
+- FAISS vector index creation and semantic retrieval
+- Neo4j knowledge graph population from extracted metadata
+- Natural-language-to-Cypher query generation (LangChain + Gemini)
+- Hybrid query routing — KG-only, RAG-only, or both
+- FastAPI REST endpoints for chat and thread history
+- Firebase Firestore for conversation persistence
+- Fallback keyword-based search when semantic retrieval misses
 
-4. **Create a `.env` file**  
-   Copy the example and fill in the values.  
-   ```bash
-   cp .env.example .env
-   ```
+## System Architecture
 
-5. **Run the FastAPI server**  
-   ```bash
-   uvicorn backend.main:app --reload
-   ```
+```
+User → FastAPI /api/chat → Route Decider (KG / RAG / BOTH)
+                                ├── KG → Neo4j → Gemini → Answer
+                                └── RAG → FAISS → Gemini → Answer
+                                     └── Built from docs_parsed/
+```
 
-6. **Build the FAISS index (once)**  
-   ```bash
-   python rag_pipeline/build_vector_index.py
-   ```
-
-## Deployment
-
-The app is ready to be deployed on Render, Railway, or any platform that supports FastAPI.
-
-### Render
-
-1. Create a new **Web Service**.  
-2. Set the **Build Command** to `pip install -r requirements.txt`  
-3. Set the **Start Command** to `uvicorn backend.main:app --host 0.0.0.0 --port $PORT`  
-4. Add the environment variables listed in `.env.example`.  
-5. Deploy.
-
-### Railway
-
-1. Add a new **Service**.  
-2. Use the same build and start commands as Render.  
-3. Add the required environment variables.  
-4. Deploy.
-
-## API Endpoints
-
-| Endpoint | Method | Description |
-|----------|--------|-------------|
-| `/api/chat` | POST | Main chat endpoint. Accepts `user_id`, `thread_id`, and `message`. |
-| `/api/thread/{thread_id}` | GET | Retrieve conversation history. Requires `user_id` query param. |
-| `/health` | GET | Health check endpoint. Returns `{"status":"ok"}`. |
-
-## Folder Structure
+## Repository Structure
 
 ```
 Astra_Q_Backend/
 ├── backend/
-│   ├── main.py
+│   ├── main.py                       # FastAPI application
 │   ├── api/
-│   │   ├── routes/
-│   │   │   └── chat.py
-│   │   └── router_logic.py
+│   │   ├── routes/chat.py            # Chat and thread endpoints
+│   │   └── router_logic.py           # Query mode routing
 │   └── session/
-│       └── firebase_session.py
+│       └── firebase_session.py       # Firestore persistence
 ├── kg_pipeline/
-│   ├── kg_nl_demo.py
-│   ├── populate_kg.py
-│   ├── queries.py
-│   ├── cypher_examples.md
-│   └── metadata_report.txt
+│   ├── populate_kg.py                # Neo4j graph population
+│   ├── kg_nl_demo.py                 # NL→Cypher query chain
+│   ├── queries.py                    # Centralized Cypher templates
+│   └── metadata_report.txt           # Extracted page metadata
 ├── rag_pipeline/
-│   ├── build_vector_index.py
-│   ├── retrieve.py
-│   └── store_vectordb.py   # legacy prototype
+│   ├── retrieve.py                   # RAG retrieval + Gemini answer
+│   ├── build_vector_index.py         # FAISS index builder
+│   └── faiss_store/                  # Pre-built vector index
+├── static_pipeline/
+│   ├── crawlers/                     # HTML crawling and doc download
+│   ├── parsers/                      # PDF and DOCX parsing
+│   ├── utils/                        # File and text utilities
+│   └── output/                       # Crawled and parsed artifacts
+├── mosdac-scraper/
+│   └── scripts/                      # Playwright-based dynamic scraper
 ├── requirements.txt
-└── .env.example
+└── README.md
 ```
 
-## Testing
+## Tech Stack
 
-Run the test suite with:
+| Component | Technology |
+|-----------|-----------|
+| API framework | FastAPI |
+| Vector store | FAISS (sentence-transformers/all-MiniLM-L6-v2) |
+| Graph database | Neo4j |
+| LLM | Google Gemini (gemini-2.5-flash-lite) |
+| NL→Cypher | LangChain GraphCypherQAChain |
+| Document parsing | pdfplumber, python-docx |
+| Session store | Firebase Firestore |
+| Crawling | requests, BeautifulSoup, Playwright |
+
+## Setup Instructions
 
 ```bash
-pytest
+git clone <repo-url>
+cd Astra_Q_Backend
+python -m venv .venv
 ```
 
-(Tests are located in the `tests/` directory and cover the chat endpoint, KG queries, and RAG retrieval.)
+Activate the virtual environment:
 
-## Contributing
+- **Windows**: `.venv\Scripts\activate`
+- **Linux/macOS**: `source .venv/bin/activate`
 
-Feel free to open issues or pull requests. Please keep the code style consistent and add tests for new features.
+```bash
+pip install -r requirements.txt
+```
 
-## License
+## Environment Variables
 
-MIT
+Create a `.env` file in the project root or in `kg_pipeline/.env` with the following variables:
+
+```env
+GOOGLE_API_KEY=
+NEO4J_URI=
+NEO4J_USERNAME=
+NEO4J_PASSWORD=
+NEO4J_DATABASE=
+FIREBASE_SERVICE_ACCOUNT_JSON=
+```
+
+For local development you may also set `GOOGLE_APPLICATION_CREDENTIALS` to point to a Firebase service account key file instead of `FIREBASE_SERVICE_ACCOUNT_JSON`.
+
+## Running the Backend
+
+```bash
+uvicorn backend.main:app --reload
+```
+
+The server starts at `http://localhost:8000`.
+
+## Running the Pipelines
+
+### Build the FAISS vector index (one-time)
+
+```bash
+python rag_pipeline/build_vector_index.py
+```
+
+### Populate the Neo4j knowledge graph (one-time)
+
+```bash
+python kg_pipeline/populate_kg.py
+```
+
+### Crawl and parse MOSDAC content
+
+```bash
+python main.py
+```
+
+Follow the interactive menu to run individual pipeline steps or all steps.
+
+## API Endpoints
+
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| POST | `/api/chat` | Send a message and receive an answer. Accepts `user_id`, `thread_id`, and `message`. |
+| GET | `/api/thread/{thread_id}` | Retrieve conversation history. Requires `user_id` query parameter. |
+| GET | `/` | Root health check. Returns `{"message": "Astra-Q backend is running"}`. |
+
+### POST `/api/chat` Request Body
+
+```json
+{
+  "user_id": "anonymous",
+  "thread_id": "default",
+  "message": "What rainfall products are available from INSAT-3D?",
+  "history": []
+}
+```
+
+### POST `/api/chat` Response
+
+```json
+{
+  "answer": "INSAT-3D provides rainfall products...",
+  "sources": [
+    {
+      "source": "KG",
+      "content_preview": "",
+      "cypher": "MATCH ...",
+      "rows": []
+    }
+  ],
+  "mode": "kg"
+}
+```
+
+## Example Usage
+
+```python
+import requests
+
+resp = requests.post("http://localhost:8000/api/chat", json={
+    "message": "Which satellites observe sea surface temperature?",
+})
+print(resp.json()["answer"])
+```
+
+```bash
+# RAG-only query
+curl -X POST http://localhost:8000/api/chat \
+  -H "Content-Type: application/json" \
+  -d '{"message": "Explain how SST is measured from INSAT-3D"}'
+```
+
+## Current Implementation Status
+
+The following components are implemented and functional:
+
+- **Content ingestion**: Static MOSDAC crawling, PDF/DOCX download and parsing, metadata extraction
+- **RAG pipeline**: FAISS vector index creation, semantic retrieval, Gemini answer generation, keyword fallback
+- **Knowledge Graph**: Neo4j schema (Satellite, Product, Parameter, Region), graph population from metadata, NL→Cypher querying
+- **API**: FastAPI chat endpoint with hybrid KG/RAG/BOTH routing, Firebase conversation persistence
+- **Utilities**: File I/O helpers, text cleaning, schema definitions
