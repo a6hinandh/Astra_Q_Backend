@@ -11,11 +11,7 @@ import spacy
 
 # Load .env from project root: <project_root>/config/.env
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
-<<<<<<< HEAD
 env_path = os.path.join(BASE_DIR, "config", ".env")
-=======
-env_path = os.path.join(BASE_DIR, "kg_pipeline", ".env")
->>>>>>> astra-q-phase6
 load_dotenv(env_path)
 
 api_key = os.getenv("GOOGLE_API_KEY") or os.getenv("GEMINI_API_KEY")
