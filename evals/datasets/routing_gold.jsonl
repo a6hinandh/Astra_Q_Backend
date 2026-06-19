@@ -1,0 +1,22 @@
+{"id": "r001", "query": "where is INSAT-3D located", "expected_mode": "kg", "expected_tools": ["vector_search", "knowledge_graph"], "notes": "KG mode: 'where is' triggers KG"}
+{"id": "r002", "query": "where are the meteorological satellites stationed", "expected_mode": "kg", "expected_tools": ["vector_search", "knowledge_graph"], "notes": "KG mode: 'where are' triggers KG"}
+{"id": "r003", "query": "list all ocean products from Oceansat-3", "expected_mode": "kg", "expected_tools": ["vector_search", "knowledge_graph"], "notes": "KG mode: 'list' triggers KG"}
+{"id": "r004", "query": "which products are related to ocean color", "expected_mode": "kg", "expected_tools": ["vector_search", "knowledge_graph"], "notes": "KG mode: 'which products' triggers KG"}
+{"id": "r005", "query": "which data does INSAT-3D collect", "expected_mode": "kg", "expected_tools": ["vector_search", "knowledge_graph"], "notes": "KG mode: 'which data' triggers KG"}
+{"id": "r006", "query": "explain how INSAT-3D captures weather data", "expected_mode": "rag", "expected_tools": ["vector_search", "knowledge_graph"], "notes": "RAG mode: 'explain' triggers RAG"}
+{"id": "r007", "query": "what is the resolution of INSAT-3D imager", "expected_mode": "rag", "expected_tools": ["vector_search", "knowledge_graph"], "notes": "RAG mode: 'what is' triggers RAG"}
+{"id": "r008", "query": "how does the scatterometer work on Oceansat-3", "expected_mode": "rag", "expected_tools": ["vector_search", "knowledge_graph"], "notes": "RAG mode: 'how does' triggers RAG"}
+{"id": "r009", "query": "describe the application of INSAT-3D in cyclones", "expected_mode": "rag", "expected_tools": ["vector_search", "knowledge_graph"], "notes": "RAG mode: 'describe' triggers RAG"}
+{"id": "r010", "query": "why is INSAT-3D important for weather monitoring", "expected_mode": "rag", "expected_tools": ["vector_search", "knowledge_graph"], "notes": "RAG mode: 'why' triggers RAG"}
+{"id": "r011", "query": "INSAT-3D data availability", "expected_mode": "both", "expected_tools": ["vector_search", "knowledge_graph"], "notes": "BOTH: no heuristic keyword match"}
+{"id": "r012", "query": "Oceansat-3 ocean color data products", "expected_mode": "both", "expected_tools": ["vector_search", "knowledge_graph"], "notes": "BOTH: no heuristic keyword match"}
+{"id": "r013", "query": "tell me about MOSDAC services", "expected_mode": "both", "expected_tools": ["vector_search", "knowledge_graph"], "notes": "BOTH: no heuristic keyword match"}
+{"id": "r014", "query": "satellite data for agriculture monitoring", "expected_mode": "both", "expected_tools": ["vector_search", "knowledge_graph"], "notes": "BOTH: no heuristic keyword match"}
+{"id": "r015", "query": "what are the different types of satellites in INSAT series", "expected_mode": "both", "expected_tools": ["vector_search", "knowledge_graph"], "notes": "BOTH: 'what are' does not match any heuristic"}
+{"id": "r016", "query": "where can I find INSAT-3D imager data", "expected_mode": "both", "expected_tools": ["vector_search", "knowledge_graph"], "notes": "BOTH: 'where can' doesn't match 'where is' or 'where are'"}
+{"id": "r017", "query": "list parameters measured by Oceansat-3", "expected_mode": "kg", "expected_tools": ["vector_search", "knowledge_graph"], "notes": "KG mode: 'list' triggers KG"}
+{"id": "r018", "query": "explain the difference between RAG and KG modes", "expected_mode": "rag", "expected_tools": ["vector_search", "knowledge_graph"], "notes": "RAG mode: 'explain' triggers RAG"}
+{"id": "r019", "query": "how does MOSDAC serve satellite data to users", "expected_mode": "rag", "expected_tools": ["vector_search", "knowledge_graph"], "notes": "RAG mode: 'how does' triggers RAG"}
+{"id": "r020", "query": "describe the role of INSAT-3D in disaster management", "expected_mode": "rag", "expected_tools": ["vector_search", "knowledge_graph"], "notes": "RAG mode: 'describe' triggers RAG"}
+{"id": "r021", "query": "Oceansat-3 and INSAT-3D comparison", "expected_mode": "both", "expected_tools": ["vector_search", "knowledge_graph"], "notes": "BOTH: no heuristic keyword match"}
+{"id": "r022", "query": "latest updates from MOSDAC portal", "expected_mode": "both", "expected_tools": ["vector_search", "knowledge_graph"], "notes": "BOTH: no heuristic keyword match"}

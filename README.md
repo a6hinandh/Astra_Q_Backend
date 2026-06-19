@@ -218,15 +218,41 @@ RequestTrace
 
 - Route decider uses simple keyword matching (will evolve into an intent classifier)
 - No grounding verifier — hallucination detection is not yet implemented
-- No evaluation benchmarks or test suite
 - No Docker image or CI pipeline
 - spaCy model `en_core_web_sm` must be downloaded separately (`python -m spacy download en_core_web_sm`)
 - Trace storage is in-memory only (not persisted across restarts)
+- Benchmarks are lightweight and local (see Evaluation Benchmarks section)
+
+## Evaluation Benchmarks
+
+Vanta AI includes a local evaluation harness for measuring routing, tool selection, and end-to-end agent behavior.
+
+### Running
+
+```bash
+python scripts/run_evals.py
+```
+
+A Markdown report is saved to `reports/evaluation_report.md`.
+
+### What is evaluated
+
+- **Routing accuracy** — how well `backend/api/router_logic.py` predicts the correct mode (KG / RAG / BOTH) for a set of gold queries.
+- **Planned tool selection** — whether `AgentPlanner.decompose()` selects the expected tools for each query.
+- **Fake-tool end-to-end agent workflow** — `run_agent_query()` is run against a registry of fake tools (no external services), and the generated answers are checked for expected keywords.
+
+### Current limitations
+
+- Benchmarks run locally without live Neo4j, FAISS, Firebase, or Gemini.
+- Routing accuracy reflects the current heuristic-based router (simple keyword matching).
+- Tool selection accuracy tests the Planner, which currently returns a fixed plan.
+- No live retrieval quality benchmark (MRR over real indexed documents) yet.
+- No full hallucination or grounding evaluator yet.
+- Future work: retrieval MRR, grounded answer evaluation, trace quality checks, multi-turn evaluation.
 
 ## Roadmap
 
-- **Agent planner**: Intent classification → plan → execute → synthesize
 - **Grounding verifier**: Citation validation and hallucination detection
 - **Trace persistence**: Database-backed trace storage for production
-- **Evaluation benchmarks**: Gold Q/A datasets, retrieval MRR, routing accuracy
+- **Retrieval MRR benchmarks**: Over real FAISS index
 - **MCP integration**: Out-of-process tool boundaries (later, not first)
