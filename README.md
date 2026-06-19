@@ -17,9 +17,10 @@ Vanta AI ingests content from satellite data portals (MOSDAC), builds a FAISS ve
 
 ```
 User → FastAPI /api/chat → Route Decider (KG / RAG / BOTH)
-                                ├── KG → Neo4j → Gemini → Answer
-                                └── RAG → FAISS → Gemini → Answer
-                                     └── Built from docs_parsed/
+                                ├── ToolRegistry
+                                │   ├── knowledge_graph → Neo4j → Gemini → Answer
+                                │   └── vector_search  → FAISS → Gemini → Answer
+                                └── Both tools combined
 ```
 
 ## Repository Structure
@@ -29,12 +30,19 @@ vanta-ai/
 ├── backend/
 │   ├── main.py                       # FastAPI application (lazy Firebase init)
 │   ├── api/
-│   │   ├── routes/chat.py            # Chat and thread endpoints
+│   │   ├── routes/chat.py            # Chat and thread endpoints → calls ToolRegistry
 │   │   └── router_logic.py           # Query mode routing
 │   └── session/
 │       └── firebase_session.py       # Firestore persistence
 ├── core/
-│   └── config.py                     # Centralized configuration
+│   ├── config.py                     # Centralized configuration
+│   └── models.py                     # Shared models (Evidence, ToolResult, etc.)
+├── tools/
+│   ├── __init__.py                   # get_default_registry() factory
+│   ├── base.py                       # BaseTool interface
+│   ├── registry.py                   # ToolRegistry (register, get, list, run)
+│   ├── vector_search.py              # VectorSearchTool → rag_pipeline/retrieve.py
+│   └── knowledge_graph.py            # KnowledgeGraphTool → kg_pipeline/kg_nl_demo.py
 ├── kg_pipeline/
 │   ├── populate_kg.py                # Neo4j graph population
 │   ├── kg_nl_demo.py                 # NL→Cypher query chain (lazy init)
@@ -52,10 +60,14 @@ vanta-ai/
 │   ├── run_pipeline.py               # Pipeline step runner
 │   ├── run_rag_cli.py                # Interactive RAG demo
 │   └── lambda_function.py            # AWS Lambda scraper (legacy)
+├── tests/
+│   ├── test_config.py                # Config tests (Day 1-2)
+│   ├── test_imports.py               # Import safety tests (Day 1-2)
+│   ├── test_tool_registry.py         # Registry tests (Day 3-4)
+│   ├── test_tool_contracts.py        # Tool model contract tests (Day 3-4)
+│   └── test_default_registry.py      # Default registry smoke tests (Day 3-4)
 ├── mosdac-scraper/
 │   └── scripts/                      # Playwright-based dynamic scraper
-├── core/
-│   └── config.py                     # Centralized env config
 ├── .env.example                      # Environment template
 ├── requirements.txt
 └── README.md
@@ -117,6 +129,41 @@ python kg_pipeline/populate_kg.py            # Populate Neo4j graph
 | GET | `/api/thread/{thread_id}` | Get conversation history. Requires `user_id` query param. |
 | GET | `/` | Health check. |
 
+## Tool Layer
+
+Vanta AI now wraps retrieval and knowledge graph capabilities behind clean tool interfaces. This prepares the repo for the future agent planner, structured traces, evaluation, and MCP integration.
+
+### Current tools
+
+| Tool | Description | Backend |
+|------|-------------|---------|
+| `vector_search` | Semantic search over FAISS vector store with Gemini answer generation | `rag_pipeline/retrieve.py` |
+| `knowledge_graph` | NL→Cypher querying over Neo4j knowledge graph | `kg_pipeline/kg_nl_demo.py` |
+
+### Usage
+
+```python
+from tools import get_default_registry
+
+registry = get_default_registry()
+# No external connections at import time — tools are just lightweight wrappers
+
+result = registry.run_tool("vector_search", "What is INSAT-3D resolution?")
+# Or:
+result = registry.run_tool("knowledge_graph", "Which products are ocean-related from Oceansat-3?")
+
+print(result.success, result.metadata.get("answer"))
+```
+
+### Design
+
+- `BaseTool` (ABC) in `tools/base.py` defines the interface: `name`, `description`, `input_schema`, `run(input: ToolInput) -> ToolResult`.
+- `ToolRegistry` in `tools/registry.py` manages registration, lookup, and execution. Duplicate names raise `DuplicateToolError`; missing names raise `ToolNotFoundError`.
+- `get_default_registry()` in `tools/__init__.py` creates a pre-configured registry with both tools. Calling it does **not** connect to Neo4j, load FAISS, call Gemini, or require Firebase.
+- Tools use lazy imports and graceful error handling — missing dependencies or unconfigured services return a controlled `ToolResult` error instead of crashing.
+- The chat endpoint (`backend/api/routes/chat.py`) now routes queries through the `ToolRegistry`, preserving the existing response shape.
+- MCP integration is intentionally deferred until tool boundaries are stable.
+
 ## Known Limitations
 
 - Route decider uses simple keyword matching (will evolve into an intent classifier)
@@ -128,7 +175,6 @@ python kg_pipeline/populate_kg.py            # Populate Neo4j graph
 
 ## Roadmap
 
-- **Tool registry**: `Planner` + `Executor` pattern for extensible tool use
 - **Agent planner**: Intent classification → plan → execute → synthesize
 - **Grounding verifier**: Citation validation and hallucination detection
 - **Structured traces**: Per-request observability (steps, evidence, confidence)
