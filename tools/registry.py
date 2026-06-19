@@ -1,8 +1,12 @@
 from __future__ import annotations
 
+import logging
+import time
 from typing import Any
 
 from tools.base import BaseTool
+
+logger = logging.getLogger(__name__)
 
 
 class ToolRegistryError(Exception):
@@ -45,8 +49,71 @@ class ToolRegistry:
             for t in self._tools.values()
         ]
 
-    def run_tool(self, name: str, query: str, **kwargs: Any) -> Any:
-        tool = self.get(name)
+    def run_tool(self, name: str, query: str, trace: Any = None, **kwargs: Any) -> Any:
         from core.models import ToolInput
 
-        return tool.run(ToolInput(query=query, parameters=kwargs))
+        tool = self.get(name)
+        start = time.perf_counter()
+        input_summary = query[:80] if query else ""
+
+        try:
+            result = tool.run(ToolInput(query=query, parameters=kwargs))
+            elapsed_ms = round((time.perf_counter() - start) * 1000, 1)
+            result.latency_ms = elapsed_ms
+
+            if trace is not None:
+                from core.tracing import ToolTrace
+
+                trace.add_tool_trace(
+                    ToolTrace(
+                        tool_name=name,
+                        input_summary=input_summary,
+                        success=result.success,
+                        evidence_count=len(result.evidence),
+                        latency_ms=elapsed_ms,
+                        error=result.error,
+                        metadata={
+                            "error": result.error,
+                        }
+                        if result.error
+                        else {},
+                    )
+                )
+
+            logger.info(
+                "Tool run: %s | success=%s | latency=%.0fms | evidence=%d | query_preview=%s",
+                name,
+                result.success,
+                elapsed_ms,
+                len(result.evidence),
+                input_summary[:40],
+            )
+            return result
+
+        except Exception as exc:
+            elapsed_ms = round((time.perf_counter() - start) * 1000, 1)
+            error_msg = f"{type(exc).__name__}: {exc}"
+
+            if trace is not None:
+                from core.tracing import ToolTrace
+
+                trace.add_tool_trace(
+                    ToolTrace(
+                        tool_name=name,
+                        input_summary=input_summary,
+                        success=False,
+                        evidence_count=0,
+                        latency_ms=elapsed_ms,
+                        error=error_msg,
+                    )
+                )
+
+            logger.error(
+                "Tool run failed: %s | latency=%.0fms | error=%s",
+                name,
+                elapsed_ms,
+                error_msg,
+            )
+            from core.models import ToolResult
+
+            return ToolResult.from_error(name, error_msg)

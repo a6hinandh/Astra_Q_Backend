@@ -2,6 +2,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from backend.api.routes.chat import router as chat_router
+from backend.api.routes.trace import router as trace_router
 from backend.session.firebase_session import init_firebase
 from core.config import settings
 
@@ -9,6 +10,7 @@ app = FastAPI()
 
 # Routers
 app.include_router(chat_router, prefix="/api")
+app.include_router(trace_router, prefix="/api")
 
 
 # CORS — configurable via CORS_ALLOWED_ORIGINS env
