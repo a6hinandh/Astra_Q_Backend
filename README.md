@@ -36,7 +36,8 @@ vanta-ai/
 │       └── firebase_session.py       # Firestore persistence
 ├── core/
 │   ├── config.py                     # Centralized configuration
-│   └── models.py                     # Shared models (Evidence, ToolResult, etc.)
+│   ├── models.py                     # Shared models (Evidence, ToolResult, etc.)
+│   └── tracing.py                    # Trace models, TraceStore, generate_trace_id
 ├── tools/
 │   ├── __init__.py                   # get_default_registry() factory
 │   ├── base.py                       # BaseTool interface
@@ -65,7 +66,10 @@ vanta-ai/
 │   ├── test_imports.py               # Import safety tests (Day 1-2)
 │   ├── test_tool_registry.py         # Registry tests (Day 3-4)
 │   ├── test_tool_contracts.py        # Tool model contract tests (Day 3-4)
-│   └── test_default_registry.py      # Default registry smoke tests (Day 3-4)
+│   ├── test_default_registry.py      # Default registry smoke tests (Day 3-4)
+│   ├── test_tracing_models.py       # Trace model tests (Day 5-6)
+│   ├── test_trace_store.py          # TraceStore tests (Day 5-6)
+│   └── test_tool_registry_tracing.py # Registry tracing tests (Day 5-6)
 ├── mosdac-scraper/
 │   └── scripts/                      # Playwright-based dynamic scraper
 ├── .env.example                      # Environment template
@@ -125,8 +129,10 @@ python kg_pipeline/populate_kg.py            # Populate Neo4j graph
 
 | Method | Endpoint | Description |
 |--------|----------|-------------|
-| POST | `/api/chat` | Send a message. Returns answer with sources and mode. |
+| POST | `/api/chat` | Send a message. Returns answer, sources, mode, and trace_id. |
 | GET | `/api/thread/{thread_id}` | Get conversation history. Requires `user_id` query param. |
+| GET | `/api/trace/{trace_id}` | Get structured trace for a past request. |
+| GET | `/api/traces/recent?limit=20` | List recent traces. |
 | GET | `/` | Health check. |
 
 ## Tool Layer
@@ -162,21 +168,65 @@ print(result.success, result.metadata.get("answer"))
 - `get_default_registry()` in `tools/__init__.py` creates a pre-configured registry with both tools. Calling it does **not** connect to Neo4j, load FAISS, call Gemini, or require Firebase.
 - Tools use lazy imports and graceful error handling — missing dependencies or unconfigured services return a controlled `ToolResult` error instead of crashing.
 - The chat endpoint (`backend/api/routes/chat.py`) now routes queries through the `ToolRegistry`, preserving the existing response shape.
+- Every tool run is traced with latency, success/error, and evidence count when called through the registry with a trace object.
 - MCP integration is intentionally deferred until tool boundaries are stable.
+
+## Structured Tracing
+
+Every chat request now receives a `trace_id`. Tool calls are traced with latency, success/error, and evidence counts. Traces make the system easier to debug and prepare it for future planner/router workflows.
+
+### How it works
+
+1. When a `POST /api/chat` request arrives, a `RequestTrace` is created with a unique `trace_id`, `user_id`, `thread_id`, and `query`.
+2. The selected mode is recorded.
+3. Each tool call via the `ToolRegistry` records a `ToolTrace` event on the request trace, capturing `tool_name`, `success`, `evidence_count`, `latency_ms`, and any error.
+4. After the response is built, the trace is finalized with `status` (success / error / partial), `final_answer_preview`, and `latency_ms`.
+5. The trace is stored in the in-memory `TraceStore` (bounded to the latest 500 traces).
+6. The response includes the `trace_id` for later retrieval.
+
+### Retrieving traces
+
+```bash
+# Get a specific trace
+curl http://localhost:8000/api/trace/<trace_id>
+
+# List recent traces
+curl http://localhost:8000/api/traces/recent?limit=10
+```
+
+### Design
+
+- Tracing is **optional** at the registry level — `registry.run_tool()` accepts an optional `trace` parameter. Callers that don't pass a trace work identically to before.
+- No secrets, API keys, or full document chunks are stored in traces. Query text is previewed (first 100 chars), answers are previewed (first 200 chars).
+- The current `TraceStore` is in-memory only, suitable for local and demo use. Production storage is a future improvement.
+- Request-level logging uses Python's `logging` module (not `print`). Log lines include `trace_id`, `mode`, and `status`.
+
+### Trace data model
+
+```
+RequestTrace
+├── trace_id, user_id, thread_id, query
+├── selected_mode, status, latency_ms
+├── final_answer_preview, error
+└── tool_traces[]
+    ├── tool_name, input_summary, success
+    ├── evidence_count, latency_ms, error
+    └── metadata
+```
 
 ## Known Limitations
 
 - Route decider uses simple keyword matching (will evolve into an intent classifier)
 - No grounding verifier — hallucination detection is not yet implemented
-- No structured traces per request
 - No evaluation benchmarks or test suite
 - No Docker image or CI pipeline
 - spaCy model `en_core_web_sm` must be downloaded separately (`python -m spacy download en_core_web_sm`)
+- Trace storage is in-memory only (not persisted across restarts)
 
 ## Roadmap
 
 - **Agent planner**: Intent classification → plan → execute → synthesize
 - **Grounding verifier**: Citation validation and hallucination detection
-- **Structured traces**: Per-request observability (steps, evidence, confidence)
+- **Trace persistence**: Database-backed trace storage for production
 - **Evaluation benchmarks**: Gold Q/A datasets, retrieval MRR, routing accuracy
 - **MCP integration**: Out-of-process tool boundaries (later, not first)
