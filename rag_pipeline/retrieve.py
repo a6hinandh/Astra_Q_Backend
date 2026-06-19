@@ -1,4 +1,5 @@
 import os
+from functools import lru_cache
 
 from dotenv import load_dotenv
 from langchain_huggingface.embeddings import HuggingFaceEmbeddings
@@ -7,36 +8,64 @@ import google.generativeai as genai
 import spacy
 
 
-# ---------------- ENV + MODEL SETUP ----------------
+# ---------------- LAZY INIT HELPERS ----------------
 
-# Load .env from project root: <project_root>/config/.env
-BASE_DIR = os.path.dirname(os.path.dirname(__file__))
-env_path = os.path.join(BASE_DIR, "config", ".env")
-load_dotenv(env_path)
+CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
+BASE_DIR = os.path.dirname(CURRENT_DIR)
 
-api_key = os.getenv("GOOGLE_API_KEY") or os.getenv("GEMINI_API_KEY")
-genai.configure(api_key=api_key)
 
-model = genai.GenerativeModel("gemini-2.5-flash-lite")
+def _ensure_env_loaded():
+    """Load .env files (idempotent — dotenv ignores repeated calls)."""
+    env_path = os.path.join(BASE_DIR, "config", ".env")
+    load_dotenv(env_path)
+    load_dotenv(os.path.join(BASE_DIR, ".env"))
+    load_dotenv(os.path.join(CURRENT_DIR, "..", "kg_pipeline", ".env"))
 
-embedding_model_name = "sentence-transformers/all-MiniLM-L6-v2"
-embedding_wrapper = HuggingFaceEmbeddings(model_name=embedding_model_name)
 
-CURRENT_DIR = os.path.dirname(__file__)  # rag_pipeline/
-faiss_folder = os.path.join(CURRENT_DIR, "faiss_store")
+def get_embedding_model():
+    _ensure_env_loaded()
+    return HuggingFaceEmbeddings(model_name="sentence-transformers/all-MiniLM-L6-v2")
 
-vectorstore = LC_FAISS.load_local(
-    folder_path=faiss_folder,
-    embeddings=embedding_wrapper,
-    allow_dangerous_deserialization=True,
-)
 
-retriever = vectorstore.as_retriever(search_kwargs={"k": 5})
+@lru_cache(maxsize=1)
+def get_llm_model():
+    _ensure_env_loaded()
+    api_key = os.getenv("GOOGLE_API_KEY") or os.getenv("GEMINI_API_KEY")
+    if api_key:
+        genai.configure(api_key=api_key)
+    return genai.GenerativeModel("gemini-2.5-flash-lite")
+
+
+def get_vectorstore():
+    _ensure_env_loaded()
+    embedding_wrapper = get_embedding_model()
+    faiss_folder = os.path.join(CURRENT_DIR, "faiss_store")
+    if not os.path.isdir(faiss_folder):
+        raise RuntimeError(
+            f"FAISS index not found at {faiss_folder}. "
+            "Run 'python scripts/build_vector_index.py' or 'python rag_pipeline/build_vector_index.py' first."
+        )
+    # SAFETY: Deserializing a FAISS pickle from disk carries code-execution risk.
+    # The index path is restricted to a known local directory (rag_pipeline/faiss_store/).
+    # DO NOT load FAISS indexes from untrusted sources.
+    return LC_FAISS.load_local(
+        folder_path=faiss_folder,
+        embeddings=embedding_wrapper,
+        allow_dangerous_deserialization=True,
+    )
+
+
+@lru_cache(maxsize=1)
+def get_retriever():
+    return get_vectorstore().as_retriever(search_kwargs={"k": 5})
 
 
 # ---------------- RAG CORE FUNCTION ----------------
 
 def rag_qa(query: str, use_fallback: bool = False, fallback_keyword: str = None) -> str:
+    _ensure_env_loaded()
+    retriever = get_retriever()
+
     # Main retrieval call
     retrieved_docs = retriever.invoke(query)
 
@@ -51,6 +80,7 @@ def rag_qa(query: str, use_fallback: bool = False, fallback_keyword: str = None)
     if use_fallback and not found and fallback_keyword:
         print("Semantic search failed. Using keyword fallback...")
         fallback_lower = fallback_keyword.lower()
+        vectorstore = get_vectorstore()
         retrieved_docs = [
             doc
             for doc in vectorstore.docstore._dict.values()
@@ -102,16 +132,27 @@ Answer in a paragraph format.:
     print("Prompt sent to Gemini:\n", prompt)
 
     # Generate answer
+    model = get_llm_model()
     response = model.generate_content(prompt)
     return response.text
 
 
 # ---------------- FALLBACK KEYWORD EXTRACTION ----------------
 
-nlp = spacy.load("en_core_web_sm")
+
+@lru_cache(maxsize=1)
+def get_nlp():
+    try:
+        return spacy.load("en_core_web_sm")
+    except OSError:
+        raise RuntimeError(
+            "spaCy model 'en_core_web_sm' not found. "
+            "Run: python -m spacy download en_core_web_sm"
+        )
 
 
 def extract_fallback_keyword(query: str) -> str:
+    nlp = get_nlp()
     doc = nlp(query)
     entities = [ent.text for ent in doc.ents]
     return entities[0] if entities else None
@@ -142,6 +183,7 @@ def run_rag_pipeline(
         fallback_keyword = extract_fallback_keyword(query)
 
     # Retrieve docs BEFORE Gemini call for source listing
+    retriever = get_retriever()
     retrieved_docs = retriever.invoke(query)
 
     # Extract top 3 sources

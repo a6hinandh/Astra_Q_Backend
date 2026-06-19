@@ -212,6 +212,15 @@ marimo/_static/
 marimo/_lsp/
 __marimo__/
 
+# Vendored libraries (pip-installable, should not be tracked)
+package/
+
+# Deployment artifacts
+lambda_deployment.zip
+
+# Generated vector store indices
+rag_pipeline/faiss_store/
+
 # ASTRA-Q Specific Output Folders
 static_pipeline/output/
 mosdac-scraper/data/
