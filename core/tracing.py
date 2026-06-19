@@ -3,6 +3,7 @@ from __future__ import annotations
 import logging
 import time
 import uuid
+from contextlib import contextmanager
 from dataclasses import dataclass, field
 from enum import Enum
 from typing import Any
@@ -115,3 +116,45 @@ class TraceStore:
 
 
 trace_store = TraceStore()
+
+
+@dataclass
+class AgentTrace:
+    agent_name: str
+    started_at: float | None = None
+    ended_at: float | None = None
+    latency_ms: float | None = None
+    steps: list[dict[str, Any]] = field(default_factory=list)
+    status: TraceStatus = TraceStatus.SUCCESS
+    error: str | None = None
+
+
+@contextmanager
+def agent_trace_context(agent_name: str):
+    agent_trace = AgentTrace(agent_name=agent_name, started_at=time.time())
+    logger.debug("Agent trace started: %s", agent_name)
+    try:
+        yield agent_trace
+    except Exception as exc:
+        agent_trace.status = TraceStatus.ERROR
+        agent_trace.error = str(exc)
+        raise
+    finally:
+        agent_trace.ended_at = time.time()
+        agent_trace.latency_ms = round(
+            (agent_trace.ended_at - agent_trace.started_at) * 1000, 1
+        )
+        logger.debug(
+            "Agent trace ended: %s | latency=%.0fms",
+            agent_name,
+            agent_trace.latency_ms,
+        )
+
+
+def traced(agent: str):
+    def decorator(func):
+        def wrapper(*args, **kwargs):
+            with agent_trace_context(agent):
+                return func(*args, **kwargs)
+        return wrapper
+    return decorator
