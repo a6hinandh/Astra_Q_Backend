@@ -1,42 +1,33 @@
 import os
-import json
 from typing import List, Dict, Optional
 
 import firebase_admin
 from firebase_admin import credentials, firestore
 
-
 _db: Optional[firestore.Client] = None
 
 
 def init_firebase() -> firestore.Client:
+   
     global _db
 
-    # If already initialized, reuse the client
     if firebase_admin._apps:
+     
         _db = firestore.client()
         return _db
 
-    # First try JSON from env (for Render / production)
-    service_account_json = os.getenv("FIREBASE_SERVICE_ACCOUNT_JSON")
-    if service_account_json:
-        info = json.loads(service_account_json)
-        cred = credentials.Certificate(info)
-    else:
-        # Fallback: local path for dev
-        cred_path = os.getenv("GOOGLE_APPLICATION_CREDENTIALS")
-        if not cred_path:
-            raise RuntimeError(
-                "FIREBASE_SERVICE_ACCOUNT_JSON or GOOGLE_APPLICATION_CREDENTIALS must be set"
-            )
-        cred = credentials.Certificate(cred_path)
+    cred_path = os.getenv("GOOGLE_APPLICATION_CREDENTIALS")
+    if not cred_path:
+        raise RuntimeError("GOOGLE_APPLICATION_CREDENTIALS not set")
 
+    cred = credentials.Certificate(cred_path)
     firebase_admin.initialize_app(cred)
     _db = firestore.client()
     return _db
 
 
 def get_db() -> firestore.Client:
+    
     global _db
     if _db is None:
         return init_firebase()
@@ -93,7 +84,6 @@ def get_history(user_id: str, thread_id: str) -> List[Dict]:
             }
         )
     return history
-
 
 # Firestore chat structure:
 #

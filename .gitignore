@@ -10,7 +10,6 @@ __pycache__/
 myenv/
 
 serviceAccountKey.json
-backend/serviceAccountKey.json
 # Distribution / packaging
 .Python
 build/
@@ -143,7 +142,6 @@ celerybeat.pid
 .env
 .envrc
 .venv
-.deps-audit-venv/
 env/
 venv/
 ENV/
@@ -212,15 +210,6 @@ marimo/_static/
 marimo/_lsp/
 __marimo__/
 
-# Vendored libraries (pip-installable, should not be tracked)
-package/
-
-# Deployment artifacts
-lambda_deployment.zip
-
-# Generated vector store indices
-rag_pipeline/faiss_store/
-
 # ASTRA-Q Specific Output Folders
 static_pipeline/output/
 mosdac-scraper/data/
@@ -237,6 +226,7 @@ static_pipeline/**/*.log
 *.old
 
 # Debug/test artifacts
+test_*.py
 *.test.json
 
 # Local configs or API keys (if any)
@@ -244,4 +234,3 @@ config.yaml
 *.env
 .env.*
 mosdac-scraper/logs/no_cards_20251207_203407.png
-.aider*

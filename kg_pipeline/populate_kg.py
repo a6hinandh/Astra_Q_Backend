@@ -9,8 +9,6 @@ import ast
 from neo4j import GraphDatabase
 from dotenv import load_dotenv
 
-ENV_PATH = os.path.join(os.path.dirname(__file__), ".env")
-load_dotenv(ENV_PATH)
 load_dotenv()
 
 
@@ -137,16 +135,7 @@ def parse_metadata_report(path: str):
 
 
 class EnhancedNeo4jPopulator:
-    def __init__(self, uri, user, password, database="neo4j"):
-        # Validate environment variables
-        if not uri:
-            raise ValueError("NEO4J_URI is missing")
-        if not user:
-            raise ValueError("NEO4J_USERNAME is missing")
-        if not password:
-            raise ValueError("NEO4J_PASSWORD is missing")
-        
-        self.database = database or "neo4j"
+    def __init__(self, uri, user, password):
         self.driver = GraphDatabase.driver(uri, auth=(user, password))
 
         # Load satellites, parameters, regions, products from metadata_report.txt
@@ -164,10 +153,10 @@ class EnhancedNeo4jPopulator:
         self.driver.close()
 
     def clear_database(self):
-        print("USING DATABASE:", self.database)
+        print("USING URI:", self.driver._pool.address)
 
         """Clear all nodes and relationships"""
-        with self.driver.session(database=self.database) as session:
+        with self.driver.session() as session:
             session.run("MATCH (n) DETACH DELETE n")
             print("✅ Database cleared")
 
@@ -180,7 +169,7 @@ class EnhancedNeo4jPopulator:
             "CREATE CONSTRAINT region_id IF NOT EXISTS FOR (r:Region) REQUIRE r.id IS UNIQUE",
         ]
 
-        with self.driver.session(database=self.database) as session:
+        with self.driver.session() as session:
             for constraint in constraints:
                 try:
                     session.run(constraint)
@@ -191,7 +180,7 @@ class EnhancedNeo4jPopulator:
 
     def populate_all(self):
         """Main method to populate entire knowledge graph"""
-        with self.driver.session(database=self.database) as session:
+        with self.driver.session() as session:
             print("\n🚀 Starting population from metadata_report.txt...\n")
 
             # 1) Parameters
@@ -346,7 +335,7 @@ class EnhancedNeo4jPopulator:
         print("KNOWLEDGE GRAPH STATISTICS")
         print("=" * 60)
 
-        with self.driver.session(database=self.database) as session:
+        with self.driver.session() as session:
             print("\n📊 Node Counts:")
             for name, query in queries.items():
                 result = session.run(query)
@@ -366,12 +355,8 @@ def main():
     NEO4J_URI = os.getenv("NEO4J_URI")
     NEO4J_USER = os.getenv("NEO4J_USERNAME")
     NEO4J_PASSWORD = os.getenv("NEO4J_PASSWORD")
-    NEO4J_DATABASE = os.getenv("NEO4J_DATABASE", "neo4j")
 
-    print("Using Neo4j URI:", NEO4J_URI)
-    print("Using Neo4j database:", NEO4J_DATABASE)
-
-    populator = EnhancedNeo4jPopulator(NEO4J_URI, NEO4J_USER, NEO4J_PASSWORD, NEO4J_DATABASE)
+    populator = EnhancedNeo4jPopulator(NEO4J_URI, NEO4J_USER, NEO4J_PASSWORD)
 
     try:
         response = input("Clear existing database? (yes/no): ").strip().lower()
